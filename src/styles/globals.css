@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --color-bg: #252422;
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-surface-hover: rgba(255, 255, 255, 0.07);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 195, 0, 0.3);
+  --color-text-primary: #F5F0E8;
+  --color-text-secondary: #C4BEB4;
+  --color-text-muted: #8E8980;
+  --color-gold: #FFC300;
+  --color-gold-dark: #b38800;
+}
+
+:root {
+  --bg-primary: #252422;
+  --text-primary: #F5F0E8;
+  --gold-gradient: linear-gradient(135deg, #FFC300 0%, #b38800 100%);
+  --gold-gradient-glow: linear-gradient(135deg, #FFD033 0%, #d4a000 100%);
+}
+
+/* Base Body Styles */
+body {
+  background-color: #252422;
+  color: #F5F0E8;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Classes conforming to K1RO Global Rule */
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 195, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(255, 195, 0, 0.1);
+}
+
+/* Gold Gradient Text Helper */
+.text-gold-gradient {
+  background: linear-gradient(180deg, #FFC300 0%, #b38800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Accent Button Hover & Glow */
+.btn-gold {
+  background: linear-gradient(135deg, #FFC300 0%, #b38800 100%);
+  color: #000000;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-gold:hover {
+  box-shadow: 0 0 25px rgba(255, 195, 0, 0.4);
+  transform: scale(1.02);
+}
+
+.btn-gold:active {
+  transform: scale(0.98);
+}
+
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 195, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 195, 0, 0.55);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #252422;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFC300;
+}
