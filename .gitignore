@@ -2,12 +2,6 @@ node_modules
 dist
 dist-ssr
 *.local
-.vscode/*
-!.vscode/extensions.json
-.idea
+.vite
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Примеры аудио

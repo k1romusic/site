@@ -6,22 +6,57 @@ interface MiniAudioPlayerProps {
   title: string;
   artist: string;
   duration?: string;
+  coverImage?: string;
+  currentTime?: string;
   isPlaying: boolean;
   progress: number;
   onTogglePlay: () => void;
+  onSeek?: (percent: number) => void;
 }
 
 export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({
   title,
   artist,
   duration = '3:20',
+  coverImage,
+  currentTime,
   isPlaying,
   progress,
-  onTogglePlay
+  onTogglePlay,
+  onSeek
 }) => {
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!onSeek) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const pct = Math.max(0, Math.min(100, (clickX / rect.width) * 100));
+    onSeek(pct);
+  };
+
+  const resolvedCover = coverImage
+    ? (coverImage.startsWith('http') ? coverImage : `${import.meta.env.BASE_URL}${coverImage.replace(/^\//, '')}`)
+    : null;
+
   return (
-    <div className="w-full bg-[#1e1d1b]/90 border border-white/10 rounded-xl p-3 sm:p-4 backdrop-blur-md flex flex-col gap-3 shadow-lg">
+    <div className="w-full bg-[#1c1b19]/90 border border-white/10 rounded-2xl p-3.5 sm:p-4 backdrop-blur-xl flex flex-col gap-3 shadow-xl">
       <div className="flex items-center justify-between gap-3">
+        {/* Cover thumbnail */}
+        {resolvedCover && (
+          <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-white/10 shadow-md">
+            <img
+              src={resolvedCover}
+              alt={title}
+              className={`w-full h-full object-cover transition-transform duration-500 ${isPlaying ? 'scale-110' : 'scale-100'}`}
+              loading="lazy"
+            />
+            {isPlaying && (
+              <div className="absolute inset-0 bg-[#FFC300]/20 backdrop-blur-[1px] flex items-center justify-center">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FFC300] animate-ping" />
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Play/Pause Button */}
         <button
           type="button"
@@ -41,9 +76,9 @@ export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({
           <div className="flex items-center gap-2">
             <span className="font-bold text-sm text-[#F5F0E8] truncate tracking-wide">{title}</span>
             {isPlaying && (
-              <span className="shrink-0 flex items-center gap-1 text-[10px] font-mono text-[#FFC300] uppercase tracking-wider bg-[#FFC300]/10 px-1.5 py-0.5 rounded">
+              <span className="shrink-0 flex items-center gap-1 text-[10px] font-mono text-[#FFC300] uppercase tracking-wider bg-[#FFC300]/10 px-1.5 py-0.5 rounded border border-[#FFC300]/30">
                 <Sparkles className="w-2.5 h-2.5 animate-spin" />
-                LIVE PREVIEW
+                PLAYING
               </span>
             )}
           </div>
@@ -66,19 +101,22 @@ export const MiniAudioPlayer: React.FC<MiniAudioPlayerProps> = ({
           ))}
         </div>
 
-        {/* Duration / Audio icon */}
+        {/* Duration / Current Time */}
         <div className="text-right shrink-0">
-          <div className="flex items-center gap-1 text-xs font-mono text-white/50">
+          <div className="flex items-center gap-1 text-xs font-mono text-white/60">
             <Volume2 className="w-3.5 h-3.5 text-[#FFC300]" />
-            <span>{duration}</span>
+            <span>{isPlaying && currentTime ? currentTime : duration}</span>
           </div>
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden relative cursor-pointer">
+      {/* Progress Bar (Clickable / Seekable) */}
+      <div
+        onClick={handleProgressClick}
+        className="w-full bg-white/10 hover:bg-white/20 h-2 rounded-full overflow-hidden relative cursor-pointer transition-colors"
+      >
         <div
-          className="bg-gradient-to-r from-[#b38800] to-[#FFC300] h-full transition-all duration-150 rounded-full"
+          className="bg-gradient-to-r from-[#b38800] via-[#FFC300] to-[#ffe082] h-full transition-all duration-100 rounded-full"
           style={{ width: `${isPlaying ? progress : 0}%` }}
         />
       </div>
