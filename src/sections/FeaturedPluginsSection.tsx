@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from '../i18n/I18nContext';
 import { pluginsList } from '../data/plugins';
 import { GlassCard } from '../components/ui/GlassCard';
 import { Button } from '../components/ui/Button';
-import { Download, ShoppingBag, Check, Cpu, Layers } from 'lucide-react';
+import { Download, ShoppingBag, Check, Cpu, Layers, Sparkles, Sliders } from 'lucide-react';
 
 export const FeaturedPluginsSection: React.FC = () => {
   const { lang, t } = useTranslation();
+  const [activeDrive, setActiveDrive] = useState<number>(8.4);
+  const [oversampleMode, setOversampleMode] = useState<'8x' | '16x'>('16x');
 
   return (
-    <section id="plugins" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+    <section id="plugins" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 relative">
+      {/* Background Glow */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#FFC300]/5 rounded-full blur-[140px] pointer-events-none" />
+
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#FFC300] mb-2 block">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFC300]/10 border border-[#FFC300]/30 text-xs font-bold uppercase tracking-[0.25em] text-[#FFC300] mb-3">
+            <Sparkles className="w-3 h-3" />
             {t.plugins.badge}
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[#F5F0E8] uppercase">
+          </div>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#F5F0E8] uppercase">
             {t.plugins.title}
           </h2>
         </div>
-        <p className="text-sm sm:text-base text-[#F5F0E8]/60 max-w-lg leading-relaxed">
+        <p className="text-sm sm:text-base text-[#F5F0E8]/70 max-w-lg leading-relaxed">
           {t.plugins.subtitle}
         </p>
       </div>
@@ -32,34 +38,34 @@ export const FeaturedPluginsSection: React.FC = () => {
             key={plugin.id}
             hoverEffect={true}
             glowOnHover={true}
-            className="p-6 sm:p-10 lg:p-12 border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent relative overflow-hidden"
+            className="p-6 sm:p-10 lg:p-12 border border-white/10 bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-transparent relative overflow-hidden"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Column: Specs & Copy */}
               <div className="lg:col-span-7 flex flex-col justify-between">
                 <div>
                   {/* Badges Bar */}
-                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <div className="flex flex-wrap items-center gap-2.5 mb-4">
                     {plugin.badge && (
                       <span className="px-3 py-1 rounded-full bg-[#FFC300]/15 text-[#FFC300] text-[10px] font-mono font-bold tracking-widest uppercase border border-[#FFC300]/30">
                         {plugin.badge[lang]}
                       </span>
                     )}
-                    <span className="px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-white/50">
+                    <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-white/60">
                       v{plugin.version}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-white/50">
+                    <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-white/60">
                       {plugin.formats.join(' • ')}
                     </span>
                   </div>
 
                   {/* Plugin Name */}
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#F5F0E8] uppercase mb-3">
+                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#F5F0E8] uppercase mb-2">
                     {plugin.name}
                   </h3>
 
                   {/* Tagline */}
-                  <p className="text-base sm:text-lg font-semibold text-[#FFC300] mb-4">
+                  <p className="text-base sm:text-lg font-bold text-[#FFC300] mb-4">
                     {plugin.tagline[lang]}
                   </p>
 
@@ -94,7 +100,7 @@ export const FeaturedPluginsSection: React.FC = () => {
                       Lifetime License
                     </span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-2xl sm:text-3xl font-black text-[#FFC300] tracking-tight">
+                      <span className="text-3xl sm:text-4xl font-black text-[#FFC300] tracking-tight">
                         {lang === 'ru' ? `${plugin.priceRub.toLocaleString()} ₽` : `$${plugin.price}`}
                       </span>
                       <span className="text-xs text-white/40 line-through">
@@ -131,78 +137,89 @@ export const FeaturedPluginsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Right Column: High-Tech DSP Vector Interface Presentation */}
+              {/* Right Column: Interactive Real-Time DSP Interface Presentation */}
               <div className="lg:col-span-5">
-                <div className="relative rounded-2xl bg-[#1a1918] border border-white/10 p-6 shadow-2xl overflow-hidden group/screen">
-                  {/* Window Top Header */}
-                  <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <div className="relative rounded-3xl bg-[#181715] border border-white/10 p-6 shadow-2xl overflow-hidden group/screen">
+                  {/* Subtle Top Window Bar */}
+                  <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                       <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                       <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                     </div>
-                    <span className="text-[10px] font-mono tracking-widest text-[#FFC300] font-bold">
-                      {plugin.name} // DSP ENGINE
+                    <span className="text-[10px] font-mono tracking-widest text-[#FFC300] font-black uppercase">
+                      {plugin.name} // DSP MONITOR
                     </span>
-                    <Cpu className="w-3.5 h-3.5 text-white/40" />
+                    <Cpu className="w-4 h-4 text-[#FFC300]" />
                   </div>
 
                   {/* Stylized Interface Display Screen */}
-                  <div className="h-52 sm:h-64 rounded-xl bg-black/60 border border-white/5 p-4 flex flex-col justify-between relative overflow-hidden">
-                    {/* Simulated Waveform / Harmonic Graph */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
-                      <svg className="w-full h-36" viewBox="0 0 300 100" fill="none">
-                        <path
-                          d="M0,50 Q40,10 75,50 T150,50 T225,50 T300,50"
-                          stroke="#FFC300"
-                          strokeWidth="2.5"
-                          strokeDasharray="4 4"
-                          className="animate-pulse"
+                  <div className="h-56 sm:h-64 rounded-2xl bg-black/70 border border-white/10 p-4 flex flex-col justify-between relative overflow-hidden">
+                    {/* Animated Equalizer Spectrum Lines */}
+                    <div className="absolute inset-0 flex items-end justify-between px-4 pb-12 opacity-35 pointer-events-none">
+                      {[30, 50, 75, 90, 65, 80, 95, 85, 60, 45, 70, 85, 40, 55, 30].map((h, bIdx) => (
+                        <span
+                          key={bIdx}
+                          className="w-2 rounded-t bg-gradient-to-t from-[#b38800] to-[#FFC300] transition-all"
+                          style={{
+                            height: `${h}%`,
+                            animation: `spectrumJump ${0.6 + (bIdx % 4) * 0.2}s ease-in-out infinite alternate`
+                          }}
                         />
-                        <path
-                          d="M0,50 Q35,80 85,50 T160,20 T240,65 T300,50"
-                          stroke="#ffffff"
-                          strokeWidth="1.5"
-                          opacity="0.4"
-                        />
-                      </svg>
+                      ))}
                     </div>
 
-                    {/* Virtual Rotary Knobs & Meters */}
-                    <div className="grid grid-cols-3 gap-3 relative z-10 text-center">
-                      <div className="p-3 rounded-lg bg-white/5 border border-white/5">
-                        <span className="text-[9px] font-mono text-white/40 uppercase block">DRIVE</span>
-                        <span className="text-sm font-mono font-bold text-[#FFC300]">+8.4 dB</span>
-                      </div>
-                      <div className="p-3 rounded-lg bg-white/5 border border-white/5">
-                        <span className="text-[9px] font-mono text-white/40 uppercase block">CEILING</span>
+                    {/* Interactive Knobs & Buttons */}
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3 relative z-10 text-center">
+                      <button
+                        type="button"
+                        onClick={() => setActiveDrive((prev) => (prev >= 18 ? 4 : prev + 2))}
+                        className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FFC300]/40 transition-all cursor-pointer select-none"
+                      >
+                        <span className="text-[9px] font-mono text-white/50 uppercase block">DRIVE</span>
+                        <span className="text-sm font-mono font-bold text-[#FFC300]">+{activeDrive.toFixed(1)} dB</span>
+                      </button>
+
+                      <div className="p-3 rounded-xl bg-white/5 border border-white/10 select-none">
+                        <span className="text-[9px] font-mono text-white/50 uppercase block">CEILING</span>
                         <span className="text-sm font-mono font-bold text-[#F5F0E8]">-0.1 dB</span>
                       </div>
-                      <div className="p-3 rounded-lg bg-white/5 border border-white/5">
-                        <span className="text-[9px] font-mono text-white/40 uppercase block">OVERSAMPLE</span>
-                        <span className="text-sm font-mono font-bold text-[#FFC300]">16x LINEAR</span>
-                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setOversampleMode((prev) => (prev === '16x' ? '8x' : '16x'))}
+                        className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FFC300]/40 transition-all cursor-pointer select-none"
+                      >
+                        <span className="text-[9px] font-mono text-white/50 uppercase block">OVERSAMPLE</span>
+                        <span className="text-sm font-mono font-bold text-[#FFC300]">{oversampleMode} LINEAR</span>
+                      </button>
                     </div>
 
-                    {/* Real-Time Metering Bar */}
+                    {/* Real-Time Metering Bar with Glow */}
                     <div className="relative z-10 space-y-1.5">
-                      <div className="flex justify-between text-[9px] font-mono text-white/40">
-                        <span>L/R PEAK REDUCTION</span>
-                        <span className="text-[#FFC300] font-bold">-3.2 dBFS</span>
+                      <div className="flex justify-between text-[9px] font-mono text-white/50">
+                        <span className="flex items-center gap-1">
+                          <Sliders className="w-3 h-3 text-[#FFC300]" />
+                          DYNAMIC REDUCTION
+                        </span>
+                        <span className="text-[#FFC300] font-bold">-{(activeDrive * 0.45).toFixed(1)} dB</span>
                       </div>
-                      <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#FFC300] via-[#e6b000] to-red-500 h-full w-[78%] rounded-full animate-pulse" />
+                      <div className="w-full bg-white/10 h-2.5 rounded-full overflow-hidden p-0.5">
+                        <div
+                          className="bg-gradient-to-r from-[#b38800] via-[#FFC300] to-red-500 h-full rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(255,195,0,0.5)]"
+                          style={{ width: `${Math.min(95, 40 + activeDrive * 3)}%` }}
+                        />
                       </div>
                     </div>
                   </div>
 
                   {/* Compatibility OS Badges Footer */}
-                  <div className="mt-4 flex items-center justify-between text-[10px] font-mono text-white/40">
-                    <span className="flex items-center gap-1">
-                      <Layers className="w-3 h-3 text-[#FFC300]" />
-                      Universal Binary (ARM64 & x86_64)
+                  <div className="mt-4 flex items-center justify-between text-[10px] font-mono text-white/50">
+                    <span className="flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5 text-[#FFC300]" />
+                      Apple Silicon M1/M2/M3/M4 & Intel
                     </span>
-                    <span>64-bit Architecture</span>
+                    <span>VST3 • AU • AAX</span>
                   </div>
                 </div>
               </div>
@@ -210,6 +227,19 @@ export const FeaturedPluginsSection: React.FC = () => {
           </GlassCard>
         ))}
       </div>
+
+      <style>{`
+        @keyframes spectrumJump {
+          0% {
+            transform: scaleY(0.4);
+            opacity: 0.5;
+          }
+          100% {
+            transform: scaleY(1);
+            opacity: 0.9;
+          }
+        }
+      `}</style>
     </section>
   );
 };
