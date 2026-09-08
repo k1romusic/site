@@ -27,7 +27,7 @@ export const ContactCtaSection: React.FC = () => {
             {t.cta.lead}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
             <a
               href={brandConfig.contacts.telegram}
               target="_blank"
@@ -42,6 +42,21 @@ export const ContactCtaSection: React.FC = () => {
                 className="w-full sm:w-auto"
               >
                 {t.cta.directTg}
+              </Button>
+            </a>
+
+            <a
+              href={brandConfig.contacts.vk}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button
+                variant="glass"
+                size="lg"
+                className="w-full sm:w-auto hover:border-[#FFC300]/50"
+              >
+                VK: @denk1ro
               </Button>
             </a>
 

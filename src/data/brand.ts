@@ -50,15 +50,13 @@ export const brandConfig = {
     ]
   },
   socials: [
-    { name: 'Telegram', url: 'https://t.me/k1romusic', handle: '@k1romusic' },
-    { name: 'YouTube', url: 'https://youtube.com', handle: 'K1RO Sound' },
-    { name: 'VK', url: 'https://vk.com', handle: 'k1romusic' },
-    { name: 'SoundCloud', url: 'https://soundcloud.com', handle: 'k1ro' },
-    { name: 'GitHub', url: 'https://github.com', handle: 'k1ro-dsp' }
+    { name: 'Telegram', url: 'https://t.me/denk1ro', handle: '@denk1ro' },
+    { name: 'VK', url: 'https://vk.ru/denk1ro', handle: 'denk1ro' }
   ],
   contacts: {
-    email: 'contact@k1ro.com',
-    telegram: 'https://t.me/k1romusic',
+    email: 'soundbyk1ro@gmail.com',
+    telegram: 'https://t.me/denk1ro',
+    vk: 'https://vk.ru/denk1ro',
     location: { ru: 'Москва / Remote Worldwide', en: 'Moscow / Remote Worldwide' }
   }
 };
