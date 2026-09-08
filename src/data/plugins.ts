@@ -22,6 +22,7 @@ export const pluginsList: PluginItem[] = [
     systems: ['macOS Apple Silicon & Intel', 'Windows 10/11 64-bit'],
     featured: true,
     coverImage: '/images/plugins/ai-voice.webp',
+    screenshot: 'screenshots/ai_voice_guide_and_cloned.png',
     badge: { ru: 'NEURAL DSP', en: 'NEURAL DSP' },
     features: [
       {
@@ -100,6 +101,7 @@ export const pluginsList: PluginItem[] = [
     systems: ['macOS Apple Silicon & Intel', 'Windows 10/11 64-bit'],
     featured: true,
     coverImage: '/images/plugins/stem-studio.webp',
+    screenshot: 'screenshots/stem_studio_stems.png',
     badge: { ru: 'PRO DEMIX', en: 'PRO DEMIX' },
     features: [
       {

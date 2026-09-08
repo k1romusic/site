@@ -18,6 +18,7 @@ export interface PluginItem {
   systems: string[]; // macOS (Universal), Windows 64-bit
   featured: boolean;
   coverImage: string;
+  screenshot?: string;
   badge?: { ru: string; en: string };
   features: PluginFeature[];
   downloadUrl: string;
