@@ -16,12 +16,13 @@ export function useAudioPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Single shared audio element
+    // Shared audio instance
     const audio = new Audio();
+    audio.preload = 'auto';
     audioRef.current = audio;
 
     const onTimeUpdate = () => {
-      if (audio.duration && !isNaN(audio.duration)) {
+      if (audio.duration && !isNaN(audio.duration) && audio.duration > 0) {
         const pct = (audio.currentTime / audio.duration) * 100;
         setProgress(pct);
         const mins = Math.floor(audio.currentTime / 60);
@@ -36,20 +37,27 @@ export function useAudioPlayer() {
       setCurrentTimeFormatted('0:00');
     };
 
-    const onError = (e: Event) => {
-      console.warn('Audio playback error / file not reachable:', e);
+    const onError = () => {
+      console.warn('Audio error on src:', audio.src, audio.error);
       setIsPlaying(false);
     };
+
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
 
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('ended', onEnded);
     audio.addEventListener('error', onError);
+    audio.addEventListener('play', onPlay);
+    audio.addEventListener('pause', onPause);
 
     return () => {
       audio.pause();
       audio.removeEventListener('timeupdate', onTimeUpdate);
       audio.removeEventListener('ended', onEnded);
       audio.removeEventListener('error', onError);
+      audio.removeEventListener('play', onPlay);
+      audio.removeEventListener('pause', onPause);
     };
   }, []);
 
@@ -58,11 +66,10 @@ export function useAudioPlayer() {
     if (!audio) return;
 
     if (activeId === id) {
-      if (isPlaying) {
+      if (!audio.paused) {
         audio.pause();
-        setIsPlaying(false);
       } else {
-        audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+        audio.play().catch((e) => console.warn('Play interrupted:', e));
       }
     } else {
       setActiveId(id);
@@ -70,7 +77,6 @@ export function useAudioPlayer() {
       setCurrentTimeFormatted('0:00');
 
       if (audioUrl) {
-        // Support relative paths under Vite base
         const cleanPath = audioUrl.replace(/^\//, '');
         const base = import.meta.env.BASE_URL.endsWith('/')
           ? import.meta.env.BASE_URL
@@ -80,13 +86,10 @@ export function useAudioPlayer() {
           : `${base}${cleanPath}`;
         
         audio.src = resolvedUrl;
-        audio.load();
-        audio.play()
-          .then(() => setIsPlaying(true))
-          .catch((err) => {
-            console.warn('Playback blocked or failed:', err);
-            setIsPlaying(false);
-          });
+        audio.currentTime = 0;
+        audio.play().catch((err) => {
+          console.warn('Audio playback failed or blocked:', err);
+        });
       }
     }
   };
@@ -101,7 +104,10 @@ export function useAudioPlayer() {
 
   const stopTrack = () => {
     const audio = audioRef.current;
-    if (audio) audio.pause();
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
     setIsPlaying(false);
     setProgress(0);
     setActiveId(null);
