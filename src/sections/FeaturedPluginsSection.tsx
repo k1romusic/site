@@ -3,12 +3,15 @@ import { useTranslation } from '../i18n/I18nContext';
 import { pluginsList } from '../data/plugins';
 import { GlassCard } from '../components/ui/GlassCard';
 import { Button } from '../components/ui/Button';
-import { Download, ShoppingBag, Check, Cpu, Layers, Sparkles, Sliders } from 'lucide-react';
+import { Download, MessageSquare, Check, Cpu, Sparkles, Sliders, Mic, Split, Activity } from 'lucide-react';
 
 export const FeaturedPluginsSection: React.FC = () => {
   const { lang, t } = useTranslation();
-  const [activeDrive, setActiveDrive] = useState<number>(8.4);
-  const [oversampleMode, setOversampleMode] = useState<'8x' | '16x'>('16x');
+
+  // Interactive demo states per plugin
+  const [voiceModel, setVoiceModel] = useState<'Male Pop' | 'Female R&B' | 'Rock Grit'>('Female R&B');
+  const [alignTightness, setAlignTightness] = useState<number>(94);
+  const [activeStem, setActiveStem] = useState<'Vocal' | 'Drums' | 'Bass' | 'Instruments'>('Vocal');
 
   return (
     <section id="plugins" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 relative">
@@ -19,7 +22,7 @@ export const FeaturedPluginsSection: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFC300]/10 border border-[#FFC300]/30 text-xs font-bold uppercase tracking-[0.25em] text-[#FFC300] mb-3">
-            <Sparkles className="w-3 h-3" />
+            <Sparkles className="w-3.5 h-3.5" />
             {t.plugins.badge}
           </div>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#F5F0E8] uppercase">
@@ -31,7 +34,7 @@ export const FeaturedPluginsSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Featured Plugins Showcase */}
+      {/* Featured Plugins Showcase (3 plugins: AI Voice, Synchrovoice, STEM STUDIO) */}
       <div className="space-y-12">
         {pluginsList.map((plugin, idx) => (
           <GlassCard
@@ -111,7 +114,7 @@ export const FeaturedPluginsSection: React.FC = () => {
 
                   {/* Action Buttons */}
                   <div className="flex items-center gap-3 w-full sm:w-auto">
-                    <a href={plugin.downloadUrl} className="flex-1 sm:flex-initial">
+                    <a href="#contact" className="flex-1 sm:flex-initial">
                       <Button
                         variant="outline"
                         size="md"
@@ -122,15 +125,15 @@ export const FeaturedPluginsSection: React.FC = () => {
                       </Button>
                     </a>
 
-                    <a href={plugin.buyUrl} className="flex-1 sm:flex-initial">
+                    <a href="#contact" className="flex-1 sm:flex-initial">
                       <Button
                         variant="gold"
                         size="md"
                         glow={idx === 0}
-                        icon={<ShoppingBag className="w-4 h-4" />}
+                        icon={<MessageSquare className="w-4 h-4" />}
                         className="w-full sm:w-auto"
                       >
-                        {t.plugins.buy}
+                        Запросить доступ
                       </Button>
                     </a>
                   </div>
@@ -140,7 +143,7 @@ export const FeaturedPluginsSection: React.FC = () => {
               {/* Right Column: Interactive Real-Time DSP Interface Presentation */}
               <div className="lg:col-span-5">
                 <div className="relative rounded-3xl bg-[#181715] border border-white/10 p-6 shadow-2xl overflow-hidden group/screen">
-                  {/* Subtle Top Window Bar */}
+                  {/* Top Window Bar */}
                   <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
@@ -153,73 +156,148 @@ export const FeaturedPluginsSection: React.FC = () => {
                     <Cpu className="w-4 h-4 text-[#FFC300]" />
                   </div>
 
-                  {/* Stylized Interface Display Screen */}
-                  <div className="h-56 sm:h-64 rounded-2xl bg-black/70 border border-white/10 p-4 flex flex-col justify-between relative overflow-hidden">
-                    {/* Animated Equalizer Spectrum Lines */}
-                    <div className="absolute inset-0 flex items-end justify-between px-4 pb-12 opacity-35 pointer-events-none">
-                      {[30, 50, 75, 90, 65, 80, 95, 85, 60, 45, 70, 85, 40, 55, 30].map((h, bIdx) => (
-                        <span
-                          key={bIdx}
-                          className="w-2 rounded-t bg-gradient-to-t from-[#b38800] to-[#FFC300] transition-all"
-                          style={{
-                            height: `${h}%`,
-                            animation: `spectrumJump ${0.6 + (bIdx % 4) * 0.2}s ease-in-out infinite alternate`
-                          }}
-                        />
-                      ))}
-                    </div>
-
-                    {/* Interactive Knobs & Buttons */}
-                    <div className="grid grid-cols-3 gap-2 sm:gap-3 relative z-10 text-center">
-                      <button
-                        type="button"
-                        onClick={() => setActiveDrive((prev) => (prev >= 18 ? 4 : prev + 2))}
-                        className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FFC300]/40 transition-all cursor-pointer select-none"
-                      >
-                        <span className="text-[9px] font-mono text-white/50 uppercase block">DRIVE</span>
-                        <span className="text-sm font-mono font-bold text-[#FFC300]">+{activeDrive.toFixed(1)} dB</span>
-                      </button>
-
-                      <div className="p-3 rounded-xl bg-white/5 border border-white/10 select-none">
-                        <span className="text-[9px] font-mono text-white/50 uppercase block">CEILING</span>
-                        <span className="text-sm font-mono font-bold text-[#F5F0E8]">-0.1 dB</span>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setOversampleMode((prev) => (prev === '16x' ? '8x' : '16x'))}
-                        className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FFC300]/40 transition-all cursor-pointer select-none"
-                      >
-                        <span className="text-[9px] font-mono text-white/50 uppercase block">OVERSAMPLE</span>
-                        <span className="text-sm font-mono font-bold text-[#FFC300]">{oversampleMode} LINEAR</span>
-                      </button>
-                    </div>
-
-                    {/* Real-Time Metering Bar with Glow */}
-                    <div className="relative z-10 space-y-1.5">
-                      <div className="flex justify-between text-[9px] font-mono text-white/50">
-                        <span className="flex items-center gap-1">
-                          <Sliders className="w-3 h-3 text-[#FFC300]" />
-                          DYNAMIC REDUCTION
+                  {/* Plugin Specific Interactive Display Screen */}
+                  {plugin.id === 'ai-voice' && (
+                    <div className="h-60 sm:h-68 rounded-2xl bg-black/70 border border-white/10 p-4 flex flex-col justify-between relative overflow-hidden">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-white/50 border-b border-white/10 pb-2">
+                        <span className="flex items-center gap-1 text-[#FFC300]">
+                          <Mic className="w-3.5 h-3.5" />
+                          NEURAL VOCAL CLONING
                         </span>
-                        <span className="text-[#FFC300] font-bold">-{(activeDrive * 0.45).toFixed(1)} dB</span>
+                        <span className="text-[#FFC300] font-bold">LATENCY: 0.8 ms</span>
                       </div>
-                      <div className="w-full bg-white/10 h-2.5 rounded-full overflow-hidden p-0.5">
-                        <div
-                          className="bg-gradient-to-r from-[#b38800] via-[#FFC300] to-red-500 h-full rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(255,195,0,0.5)]"
-                          style={{ width: `${Math.min(95, 40 + activeDrive * 3)}%` }}
-                        />
+
+                      {/* Interactive Voice Models */}
+                      <div className="space-y-1.5 my-2">
+                        <span className="text-[10px] font-mono text-white/40 uppercase block">Целевая модель тембра:</span>
+                        <div className="grid grid-cols-3 gap-2">
+                          {(['Male Pop', 'Female R&B', 'Rock Grit'] as const).map((m) => (
+                            <button
+                              key={m}
+                              type="button"
+                              onClick={() => setVoiceModel(m)}
+                              className={`py-2 px-1 rounded-xl text-[11px] font-bold tracking-tight transition-all cursor-pointer ${
+                                voiceModel === m
+                                  ? 'bg-[#FFC300] text-black shadow-[0_0_15px_rgba(255,195,0,0.4)]'
+                                  : 'bg-white/5 text-white/70 hover:bg-white/10'
+                              }`}
+                            >
+                              {m}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Animated Spectrogram Jump */}
+                      <div className="space-y-1.5">
+                        <div className="flex justify-between text-[10px] font-mono text-white/50">
+                          <span>TIMBRE FIDELITY</span>
+                          <span className="text-[#FFC300] font-bold">99.4%</span>
+                        </div>
+                        <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden p-0.5">
+                          <div
+                            className="bg-gradient-to-r from-[#b38800] via-[#FFC300] to-[#fff] h-full rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(255,195,0,0.5)]"
+                            style={{ width: '99%' }}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
+
+                  {plugin.id === 'synchrovoice' && (
+                    <div className="h-60 sm:h-68 rounded-2xl bg-black/70 border border-white/10 p-4 flex flex-col justify-between relative overflow-hidden">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-white/50 border-b border-white/10 pb-2">
+                        <span className="flex items-center gap-1 text-[#FFC300]">
+                          <Activity className="w-3.5 h-3.5" />
+                          TIMING & PITCH ALIGNMENT
+                        </span>
+                        <span className="text-[#FFC300] font-bold">ARA2 ACTIVE</span>
+                      </div>
+
+                      {/* Interactive Tightness Knob */}
+                      <div className="grid grid-cols-2 gap-3 my-2">
+                        <button
+                          type="button"
+                          onClick={() => setAlignTightness((prev) => (prev >= 100 ? 70 : prev + 10))}
+                          className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left cursor-pointer transition-all"
+                        >
+                          <span className="text-[9px] font-mono text-white/50 uppercase block">TIMING SYNC</span>
+                          <span className="text-sm font-mono font-bold text-[#FFC300]">{alignTightness}% TIGHT</span>
+                        </button>
+                        <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-left">
+                          <span className="text-[9px] font-mono text-white/50 uppercase block">PITCH DRIFT</span>
+                          <span className="text-sm font-mono font-bold text-[#F5F0E8]">±0.1 Cents</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <div className="flex justify-between text-[10px] font-mono text-white/50">
+                          <span className="flex items-center gap-1">
+                            <Sliders className="w-3 h-3 text-[#FFC300]" />
+                            PHASE COHERENCE
+                          </span>
+                          <span className="text-[#FFC300] font-bold">100% LOCKED</span>
+                        </div>
+                        <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden p-0.5">
+                          <div
+                            className="bg-gradient-to-r from-[#b38800] via-[#FFC300] to-[#ffd54f] h-full rounded-full transition-all duration-300"
+                            style={{ width: `${alignTightness}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {plugin.id === 'stem-studio' && (
+                    <div className="h-60 sm:h-68 rounded-2xl bg-black/70 border border-white/10 p-4 flex flex-col justify-between relative overflow-hidden">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-white/50 border-b border-white/10 pb-2">
+                        <span className="flex items-center gap-1 text-[#FFC300]">
+                          <Split className="w-3.5 h-3.5" />
+                          NEURAL STEM ISOLATION
+                        </span>
+                        <span className="text-[#FFC300] font-bold">4-STEM PRO</span>
+                      </div>
+
+                      {/* Interactive Stem Selector */}
+                      <div className="space-y-1.5 my-2">
+                        <span className="text-[10px] font-mono text-white/40 uppercase block">Изолированный канал:</span>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                          {(['Vocal', 'Drums', 'Bass', 'Instruments'] as const).map((stem) => (
+                            <button
+                              key={stem}
+                              type="button"
+                              onClick={() => setActiveStem(stem)}
+                              className={`py-2 px-1 rounded-xl text-[10px] font-bold tracking-tight transition-all cursor-pointer ${
+                                activeStem === stem
+                                  ? 'bg-[#FFC300] text-black shadow-[0_0_15px_rgba(255,195,0,0.4)]'
+                                  : 'bg-white/5 text-white/70 hover:bg-white/10'
+                              }`}
+                            >
+                              {stem}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <div className="flex justify-between text-[10px] font-mono text-white/50">
+                          <span>BLEED REJECTION</span>
+                          <span className="text-[#FFC300] font-bold">-48.2 dB</span>
+                        </div>
+                        <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden p-0.5">
+                          <div
+                            className="bg-gradient-to-r from-[#b38800] via-[#FFC300] to-emerald-400 h-full rounded-full transition-all duration-300"
+                            style={{ width: '92%' }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Compatibility OS Badges Footer */}
                   <div className="mt-4 flex items-center justify-between text-[10px] font-mono text-white/50">
-                    <span className="flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5 text-[#FFC300]" />
-                      Apple Silicon M1/M2/M3/M4 & Intel
-                    </span>
-                    <span>VST3 • AU • AAX</span>
+                    <span>macOS Apple Silicon & Windows 10/11</span>
+                    <span>{plugin.formats.join(' • ')}</span>
                   </div>
                 </div>
               </div>
@@ -227,19 +305,6 @@ export const FeaturedPluginsSection: React.FC = () => {
           </GlassCard>
         ))}
       </div>
-
-      <style>{`
-        @keyframes spectrumJump {
-          0% {
-            transform: scaleY(0.4);
-            opacity: 0.5;
-          }
-          100% {
-            transform: scaleY(1);
-            opacity: 0.9;
-          }
-        }
-      `}</style>
     </section>
   );
 };

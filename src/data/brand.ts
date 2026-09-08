@@ -10,12 +10,12 @@ export const brandConfig = {
   },
   announcement: {
     active: true,
-    badge: { ru: 'РЕЛИЗ', en: 'NEW' },
+    badge: { ru: 'DSP & AI', en: 'DSP & AI' },
     text: {
-      ru: 'K1RO CLIPPER 1.0 — аналоговый сатуратор и ультра-прозрачный пик-лимитер доступен для загрузки',
-      en: 'K1RO CLIPPER 1.0 — analog saturation & ultra-transparent peak limiter is now live'
+      ru: 'K1RO DSP SUITE: AI Voice, Synchrovoice и Stem Studio — новое поколение аудио-инструментов',
+      en: 'K1RO DSP SUITE: AI Voice, Synchrovoice & Stem Studio — next-gen neural audio instruments'
     },
-    link: '/plugins/k1ro-clipper'
+    link: '#plugins'
   },
   about: {
     title: {

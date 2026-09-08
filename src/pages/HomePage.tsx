@@ -25,15 +25,15 @@ export const HomePage: React.FC = () => {
   ];
 
   const marqueeItems2 = [
-    'K1RO CLIPPER',
-    'K1RO DYNAMIC EQ',
-    'K1RO SUB LAB',
+    'AI VOICE (VOCAL CLONING)',
+    'SYNCHROVOICE (TIMING & PITCH)',
+    'STEM STUDIO (DEMIXING)',
+    'NEURAL DSP FRAMEWORK',
     'APPLE SILICON UNIVERSAL',
     'WINDOWS 64-BIT VST3',
-    'ZERO LATENCY ENGINE',
-    'HARMONIC WARMTH',
+    'ARA2 VOCAL INTEGRATION',
     'PHASE COHERENCE 99.8%',
-    'HIGH LOUDNESS MASTERING'
+    'HIGH FIDELITY EXTRACTION'
   ];
 
   return (

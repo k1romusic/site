@@ -9,7 +9,7 @@ export interface PluginItem {
   name: string;
   tagline: { ru: string; en: string };
   description: { ru: string; en: string };
-  category: 'Dynamics' | 'EQ' | 'Distortion' | 'Utility' | 'AI';
+  category: 'Dynamics' | 'EQ' | 'Distortion' | 'Utility' | 'AI' | 'Vocal DSP' | 'Stem Separation' | 'AI Audio';
   version: string;
   releaseDate: string;
   price: number; // in USD or converted

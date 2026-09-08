@@ -2,108 +2,120 @@ import { PluginItem } from '../types/plugin';
 
 export const pluginsList: PluginItem[] = [
   {
-    id: 'k1ro-clipper',
-    slug: 'k1ro-clipper',
-    name: 'K1RO CLIPPER',
+    id: 'ai-voice',
+    slug: 'ai-voice',
+    name: 'AI VOICE',
     tagline: {
-      ru: 'Прецизионный софт-клиппер с контролем аналоговых гармоник',
-      en: 'Precision soft-clipper with harmonic color control'
+      ru: 'Прецизионное нейросетевое клонирование и трансформация вокала',
+      en: 'Precision neural vocal cloning & timbre transformation engine'
     },
     description: {
-      ru: 'Разработан для получения бескомпромиссной громкости без слышимых искажений и разрушения переходных процессов (transients). Оснащен 16x оверсэмплингом и уникальным алгоритмом компенсации фазы.',
-      en: 'Engineered for uncompromising commercial loudness without transient degradation or harsh aliasing. Features pristine 16x oversampling and phase-aligned harmonics.'
+      ru: 'Инструмент нового поколения для клонирования, подмены тембра и трансформации вокальных партий. Сохраняет естественную артикуляцию, дыхание и микродинамику исполнителя без фазовых искажений и роботизированных артефактов.',
+      en: 'Next-generation neural framework for realistic vocal cloning, timbre replacement, and voice conversion. Retains natural articulation, breath, and expressive micro-dynamics.'
     },
-    category: 'Dynamics',
-    version: '1.0.4',
-    releaseDate: '2025-01-15',
-    price: 49,
-    priceRub: 4900,
-    formats: ['VST3', 'AU', 'AAX'],
-    systems: ['macOS Apple Silicon & Intel (10.15+)', 'Windows 10/11 64-bit'],
+    category: 'AI Audio',
+    version: '1.0.0',
+    releaseDate: '2025-02-15',
+    price: 79,
+    priceRub: 7900,
+    formats: ['VST3', 'AU', 'Standalone'],
+    systems: ['macOS Apple Silicon & Intel', 'Windows 10/11 64-bit'],
     featured: true,
-    coverImage: '/images/plugins/clipper-preview.webp',
-    badge: { ru: 'NEW RELEASE', en: 'NEW RELEASE' },
+    coverImage: '/images/plugins/ai-voice.webp',
+    badge: { ru: 'NEURAL DSP', en: 'NEURAL DSP' },
     features: [
       {
-        title: { ru: 'Ultra-Transparent Clipping', en: 'Ultra-Transparent Clipping' },
-        description: { ru: 'Мягкое ограничение пиков с нулевой задержкой для мониторинга в реальном времени.', en: 'Zero-latency ceiling rounding ideal for real-time monitoring and mastering.' }
+        title: { ru: 'Zero Latency Inference', en: 'Zero Latency Inference' },
+        description: { ru: 'Работа нейросетевого инференса в реальном времени с поддержкой Apple Neural Engine и NVIDIA CUDA.', en: 'Real-time inference optimized for Apple Neural Engine and NVIDIA CUDA.' }
       },
       {
-        title: { ru: '16x Linear Phase Oversampling', en: '16x Linear Phase Oversampling' },
-        description: { ru: 'Полное отсутствие цифрового элайзинга даже при агрессивном перегрузе.', en: 'Zero aliasing artifacts even under extreme drive thresholds.' }
+        title: { ru: 'Timbre & Formant Match', en: 'Timbre & Formant Match' },
+        description: { ru: 'Ультра-точная подстройка формант и тембральной окраски под целевой голос за пару кликов.', en: 'Ultra-accurate formant adjustment and timbre curve matching in seconds.' }
       },
       {
-        title: { ru: 'Odd & Even Harmonics', en: 'Odd & Even Harmonics' },
-        description: { ru: 'Аналоговая теплота легендарных ламповых консолей в один клик.', en: 'Discrete tube-style harmonic warmth tuned to human auditory curves.' }
+        title: { ru: 'Natural Vibrato & Breath', en: 'Natural Vibrato & Breath' },
+        description: { ru: 'Сохранение органического вибрато, вздохов и эмоционального напора исходного вокала.', en: 'Preserves organic vibrato, natural breathing, and emotional inflection.' }
       }
     ],
-    downloadUrl: '/downloads?product=k1ro-clipper',
-    buyUrl: 'https://k1ro.com/checkout?product=k1ro-clipper'
+    downloadUrl: '#contact',
+    buyUrl: '#contact'
   },
   {
-    id: 'k1ro-dynamic-eq',
-    slug: 'k1ro-dynamic-eq',
-    name: 'K1RO DYNAMIC EQ',
+    id: 'synchrovoice',
+    slug: 'synchrovoice',
+    name: 'SYNCHROVOICE',
     tagline: {
-      ru: 'Интеллектуальный динамический эквалайзер с подавлением резонансов',
-      en: 'Intelligent dynamic equalizer with surgical resonance control'
+      ru: 'Автоматическое выравнивание вокала по таймингу и высоте тона',
+      en: 'Automatic vocal alignment: surgical timing & micro-pitch correction'
     },
     description: {
-      ru: 'Автоматически отслеживает конфликтные резонансы вокала, барабанов и баса, сжимая их только в момент превышения порога. Чистый прозрачный микс без потери энергии.',
-      en: 'Automatically tracks problem frequencies across vocals, drums, and heavy synth lines, engaging compression only when resonances exceed threshold.'
+      ru: 'Профессиональный студийный инструмент для мгновенной синхронизации бэк-вокала, дабл-треков и хоров с ведущей партией (Lead Vocal). Корректирует фазовые сдвиги, тайминг слогов и тон с бескомпромиссной прозрачностью.',
+      en: 'Studio-grade tool for effortless alignment of backing vocals, double-tracks, and harmonies to the lead vocal. Aligns groove, transient timing, and micro-pitch seamlessly.'
     },
-    category: 'EQ',
-    version: '1.2.0',
-    releaseDate: '2024-11-20',
+    category: 'Vocal DSP',
+    version: '1.1.2',
+    releaseDate: '2025-01-20',
     price: 69,
     priceRub: 6900,
-    formats: ['VST3', 'AU'],
-    systems: ['macOS Apple Silicon & Intel (10.15+)', 'Windows 10/11 64-bit'],
+    formats: ['VST3', 'AU', 'ARA2'],
+    systems: ['macOS Apple Silicon & Intel', 'Windows 10/11 64-bit'],
     featured: true,
-    coverImage: '/images/plugins/eq-preview.webp',
-    badge: { ru: 'FLAGSHIP', en: 'FLAGSHIP' },
+    coverImage: '/images/plugins/synchrovoice.webp',
+    badge: { ru: 'ARA2 SUPPORT', en: 'ARA2 SUPPORT' },
     features: [
       {
-        title: { ru: 'Smart Resonance Detection', en: 'Smart Resonance Detection' },
-        description: { ru: 'Нейросетевое обнаружение резких частот в реальном времени.', en: 'Real-time neural resonance curve tracker for surgical cleanup.' }
+        title: { ru: 'Smart Transient Alignment', en: 'Smart Transient Alignment' },
+        description: { ru: 'Автоматическая подгонка согласных звуков и атак под лид-вокал за 1 клик.', en: 'Automatic consonant and transient snapping to reference audio in 1 click.' }
       },
       {
-        title: { ru: 'Sidechain Spectrum Link', en: 'Sidechain Spectrum Link' },
-        description: { ru: 'Разделение частотного пространства между бочкой и басом в один клик.', en: 'Dynamic carving between kick and bass in a single click.' }
+        title: { ru: 'Surgical Pitch Matching', en: 'Surgical Pitch Matching' },
+        description: { ru: 'Выравнивание высоты тона даблов без эффекта «робота» и фазовой каши.', en: 'Harmonic pitch tracking and tightening without robotic phase cancellation.' }
+      },
+      {
+        title: { ru: 'Multi-Track Batch Process', en: 'Multi-Track Batch Process' },
+        description: { ru: 'Синхронизация неограниченного числа дорожек бэков одновременно.', en: 'Simultaneous batch alignment across unlimited background vocal stacks.' }
       }
     ],
-    downloadUrl: '/downloads?product=k1ro-dynamic-eq',
-    buyUrl: 'https://k1ro.com/checkout?product=k1ro-dynamic-eq'
+    downloadUrl: '#contact',
+    buyUrl: '#contact'
   },
   {
-    id: 'k1ro-sub-lab',
-    slug: 'k1ro-sub-lab',
-    name: 'K1RO SUB LAB',
+    id: 'stem-studio',
+    slug: 'stem-studio',
+    name: 'STEM STUDIO',
     tagline: {
-      ru: 'Генератор суб-баса и фазовый сатуратор нижнего регистра',
-      en: 'Sub-bass generator & low-end phase restoration engine'
+      ru: 'Нейросетевое разделение готового трека на изолированные дорожки',
+      en: 'High-fidelity neural source separation & stem extractor'
     },
     description: {
-      ru: 'Превращает слабый и размытый низ в монолитную стену баса. Автоматическая подстройка фазы и генерация суб-гармоник 20–60 Гц.',
-      en: 'Transforms hollow low-end into a monolithic bass foundation. Features automatic phase alignment and 20–60 Hz sub-harmonic synthesis.'
+      ru: 'Передовой спектральный демикшер на базе модифицированных нейроархитектур. Идеально раскладывает стереомикс на Вокал, Барабаны, Бас и Инструменты с минимальным остаточным кровотечением (bleeding) и чистым переходным откликом.',
+      en: 'State-of-the-art neural source separation engine. Dissects any stereo mix into pristine Stems: Vocals, Drums, Bass, and Instruments with minimal bleed and zero smear.'
     },
-    category: 'Utility',
-    version: '0.9.8',
+    category: 'Stem Separation',
+    version: '2.0.0',
     releaseDate: '2025-02-01',
-    price: 39,
-    priceRub: 3900,
-    formats: ['VST3', 'AU'],
-    systems: ['macOS Apple Silicon & Intel (10.15+)', 'Windows 10/11 64-bit'],
-    featured: false,
-    coverImage: '/images/plugins/sublab-preview.webp',
-    badge: { ru: 'BETA', en: 'BETA' },
+    price: 89,
+    priceRub: 8900,
+    formats: ['Standalone', 'VST3', 'AU'],
+    systems: ['macOS Apple Silicon & Intel', 'Windows 10/11 64-bit'],
+    featured: true,
+    coverImage: '/images/plugins/stem-studio.webp',
+    badge: { ru: 'PRO DEMIX', en: 'PRO DEMIX' },
     features: [
       {
-        title: { ru: 'Mono Sub Enforcement', en: 'Mono Sub Enforcement' },
-        description: { ru: 'Кристальная моно-совместимость на любых клубных порталах.', en: 'Absolute mono compatibility on festival sound systems.' }
+        title: { ru: '4 & 6-Stem Precision Extraction', en: '4 & 6-Stem Precision Extraction' },
+        description: { ru: 'Разделение на Вокал, Ударные, Бас, Клавишные, Гитары и Прочие инструменты.', en: 'Isolates Vocals, Drums, Bass, Keys, Guitars, and Ambient soundscapes.' }
+      },
+      {
+        title: { ru: 'Acoustic Phase Restoration', en: 'Acoustic Phase Restoration' },
+        description: { ru: 'Сумма всех извлеченных стэмов звучит идентично оригиналу без фазовых дыр.', en: 'Re-summed stems null against the master track with pure phase alignment.' }
+      },
+      {
+        title: { ru: 'High-Res 32-Bit Export', en: 'High-Res 32-Bit Export' },
+        description: { ru: 'Прямой экспорт стэмов в WAV/FLAC 96 кГц / 32-bit Float для ремиксов и сэмплирования.', en: 'Direct 96 kHz / 32-bit Float lossless stem export for remixing & sampling.' }
       }
     ],
-    downloadUrl: '/downloads?product=k1ro-sub-lab',
-    buyUrl: 'https://k1ro.com/checkout?product=k1ro-sub-lab'
+    downloadUrl: '#contact',
+    buyUrl: '#contact'
   }
 ];
