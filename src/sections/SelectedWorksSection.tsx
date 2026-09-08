@@ -4,7 +4,7 @@ import { worksList } from '../data/works';
 import { WorkItem } from '../types/work';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
 import { GlobalAudioBar } from '../components/audio/GlobalAudioBar';
-import { Play, Pause, Shuffle, Sparkles, SlidersHorizontal } from 'lucide-react';
+import { Play, Pause, Shuffle, Sparkles, Music } from 'lucide-react';
 
 export const SelectedWorksSection: React.FC = () => {
   const { lang, t } = useTranslation();
@@ -37,6 +37,16 @@ export const SelectedWorksSection: React.FC = () => {
   }, [randomizedWorks, selectedFilter]);
 
   const displayedWorks = filteredWorks.slice(0, visibleCount);
+
+  // Helper for guaranteed path resolution on GitHub Pages
+  const resolveAssetUrl = (relativePath: string) => {
+    if (relativePath.startsWith('http')) return relativePath;
+    const clean = relativePath.replace(/^\//, '');
+    const base = import.meta.env.BASE_URL.endsWith('/')
+      ? import.meta.env.BASE_URL
+      : `${import.meta.env.BASE_URL}/`;
+    return `${base}${clean}`;
+  };
 
   return (
     <section id="works" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
@@ -110,9 +120,7 @@ export const SelectedWorksSection: React.FC = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
         {displayedWorks.map((work: WorkItem) => {
           const isThisPlaying = activeId === work.id && isPlaying;
-          const coverUrl = work.coverImage.startsWith('http')
-            ? work.coverImage
-            : `${import.meta.env.BASE_URL}${work.coverImage.replace(/^\//, '')}`;
+          const coverUrl = resolveAssetUrl(work.coverImage);
 
           return (
             <div
@@ -120,12 +128,12 @@ export const SelectedWorksSection: React.FC = () => {
               onClick={() => toggleTrack(work.id, work.audioPreviewUrl)}
               className={`group relative rounded-2xl overflow-hidden bg-[#181716] border transition-all duration-300 cursor-pointer select-none flex flex-col ${
                 isThisPlaying
-                  ? 'border-[#FFC300] ring-2 ring-[#FFC300]/30 shadow-[0_0_25px_rgba(255,195,0,0.3)] scale-[1.02]'
+                  ? 'border-[#FFC300] ring-2 ring-[#FFC300]/40 shadow-[0_0_25px_rgba(255,195,0,0.35)] scale-[1.02]'
                   : 'border-white/10 hover:border-[#FFC300]/60 hover:scale-105 shadow-lg'
               }`}
             >
               {/* Artwork Square */}
-              <div className="relative aspect-square w-full overflow-hidden bg-black/60">
+              <div className="relative aspect-square w-full overflow-hidden bg-[#201f1d]">
                 <img
                   src={coverUrl}
                   alt={`${work.artist} - ${work.title}`}
@@ -133,38 +141,31 @@ export const SelectedWorksSection: React.FC = () => {
                     isThisPlaying ? 'scale-110' : 'group-hover:scale-110'
                   }`}
                   loading="lazy"
-                  onError={(e) => {
-                    // Fallback to stylized SVG placeholder if image fails to render
-                    (e.target as HTMLElement).style.display = 'none';
-                  }}
                 />
 
-                {/* Dark Gradient Overlay for readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 group-hover:from-black/90 transition-opacity" />
+                {/* Subtle dark gradient for badge readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
-                {/* Top Role Badge */}
-                <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none">
-                  <span className="px-1.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[9px] font-mono uppercase text-[#FFC300] border border-white/10">
-                    {work.category === 'production' ? 'PROD' : 'MIX/MASTER'}
-                  </span>
-                  <span className="px-1.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[9px] font-mono text-white/60">
+                {/* Top Duration Badge */}
+                <div className="absolute top-2 right-2 flex items-center pointer-events-none">
+                  <span className="px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-[9px] font-mono text-white/70 border border-white/10">
                     {work.duration}
                   </span>
                 </div>
 
-                {/* Center Play Button / Visualizer Overlay */}
+                {/* Center Play Button Overlay on Hover or Playing */}
                 <div
                   className={`absolute inset-0 flex items-center justify-center transition-all duration-200 ${
                     isThisPlaying
                       ? 'bg-black/40 opacity-100'
-                      : 'bg-black/40 opacity-0 group-hover:opacity-100'
+                      : 'bg-black/30 opacity-0 group-hover:opacity-100'
                   }`}
                 >
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
+                    className={`w-11 h-11 rounded-full flex items-center justify-center transition-all ${
                       isThisPlaying
-                        ? 'bg-[#FFC300] text-black shadow-[0_0_25px_rgba(255,195,0,0.6)] scale-110'
-                        : 'bg-white/20 backdrop-blur-md text-white group-hover:bg-[#FFC300] group-hover:text-black group-hover:scale-110'
+                        ? 'bg-[#FFC300] text-black shadow-[0_0_20px_rgba(255,195,0,0.8)] scale-110'
+                        : 'bg-[#FFC300] text-black shadow-lg group-hover:scale-110'
                     }`}
                   >
                     {isThisPlaying ? (
@@ -174,27 +175,24 @@ export const SelectedWorksSection: React.FC = () => {
                     )}
                   </div>
                 </div>
-
-                {/* Hover Reveal: Detailed role description card on hover */}
-                <div className="absolute inset-x-0 bottom-0 p-3 bg-[#181716]/95 backdrop-blur-md border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 flex flex-col gap-1">
-                  <div className="flex items-center gap-1 text-[10px] text-[#FFC300] font-mono uppercase">
-                    <SlidersHorizontal className="w-3 h-3" />
-                    <span>Что сделано:</span>
-                  </div>
-                  <p className="text-[11px] text-[#F5F0E8] font-medium leading-tight line-clamp-2">
-                    {work.roles[lang]}
-                  </p>
-                </div>
               </div>
 
-              {/* Bottom Compact Info */}
-              <div className="p-2.5 flex flex-col gap-0.5 bg-[#181716]">
-                <h4 className="font-bold text-xs text-[#F5F0E8] truncate group-hover:text-[#FFC300] transition-colors">
-                  {work.title}
-                </h4>
-                <p className="text-[11px] text-[#F5F0E8]/50 truncate uppercase font-medium">
-                  {work.artist}
-                </p>
+              {/* Bottom Clean Info: Title, Artist and direct format (e.g. Сведение, Мастеринг) */}
+              <div className="p-2.5 flex flex-col gap-1 bg-[#181716] flex-1 justify-between">
+                <div className="min-w-0">
+                  <h4 className="font-bold text-xs text-[#F5F0E8] truncate group-hover:text-[#FFC300] transition-colors leading-tight">
+                    {work.title}
+                  </h4>
+                  <p className="text-[11px] text-[#F5F0E8]/60 truncate uppercase font-medium mt-0.5">
+                    {work.artist}
+                  </p>
+                </div>
+
+                {/* Clean Role: Сведение, Мастеринг / Продакшн */}
+                <div className="pt-1 border-t border-white/5 flex items-center gap-1 text-[10px] font-mono text-[#FFC300] truncate">
+                  <Music className="w-2.5 h-2.5 shrink-0" />
+                  <span className="truncate">{work.roles[lang]}</span>
+                </div>
               </div>
             </div>
           );

@@ -72,9 +72,12 @@ export function useAudioPlayer() {
       if (audioUrl) {
         // Support relative paths under Vite base
         const cleanPath = audioUrl.replace(/^\//, '');
+        const base = import.meta.env.BASE_URL.endsWith('/')
+          ? import.meta.env.BASE_URL
+          : `${import.meta.env.BASE_URL}/`;
         const resolvedUrl = audioUrl.startsWith('http')
           ? audioUrl
-          : `${import.meta.env.BASE_URL}${cleanPath}`;
+          : `${base}${cleanPath}`;
         
         audio.src = resolvedUrl;
         audio.load();

@@ -30,9 +30,13 @@ export const GlobalAudioBar: React.FC<GlobalAudioBarProps> = ({
     onSeek(pct);
   };
 
+  const cleanCover = track.coverImage.replace(/^\//, '');
+  const base = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
   const coverUrl = track.coverImage.startsWith('http')
     ? track.coverImage
-    : `${import.meta.env.BASE_URL}${track.coverImage.replace(/^\//, '')}`;
+    : `${base}${cleanCover}`;
 
   return (
     <div className="fixed bottom-4 left-4 right-4 sm:left-1/2 sm:-translate-x-1/2 sm:max-w-2xl z-50 animate-in fade-in slide-in-from-bottom-5 duration-300">
