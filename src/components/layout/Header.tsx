@@ -5,7 +5,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import { AudioVisualizerLogo } from '../ui/AudioVisualizerLogo';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { scrollToPosition } from '../../hooks/useSmoothScroll';
+import { scrollToPosition, scrollToTarget } from '../../hooks/useSmoothScroll';
 
 export const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -63,7 +63,7 @@ export const Header: React.FC = () => {
       }
     } else {
       if (isHomePage) {
-        scrollToPosition(`#${target}`, false);
+        scrollToTarget(target, { immediate: false, offset: -70 });
       } else {
         navigate(`/#${target}`);
       }
@@ -82,7 +82,7 @@ export const Header: React.FC = () => {
   const handleCtaClick = () => {
     setMobileMenuOpen(false);
     if (isHomePage) {
-      scrollToPosition('#contact', false);
+      scrollToTarget('contact', { immediate: false, offset: -70 });
     } else {
       navigate('/#contact');
     }

@@ -5,7 +5,7 @@ import { brandConfig } from '../../data/brand';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { AudioVisualizerLogo } from '../ui/AudioVisualizerLogo';
 import { ArrowUp } from 'lucide-react';
-import { scrollToPosition } from '../../hooks/useSmoothScroll';
+import { scrollToPosition, scrollToTarget } from '../../hooks/useSmoothScroll';
 
 export const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
       }
     } else {
       if (isHomePage) {
-        scrollToPosition(`#${target}`, false);
+        scrollToTarget(target, { immediate: false, offset: -70 });
       } else {
         navigate(`/#${target}`);
       }

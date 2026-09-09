@@ -13,12 +13,14 @@ import { scrollToPosition } from '../hooks/useSmoothScroll';
 export const PluginsPage: React.FC = () => {
   const { lang, t } = useTranslation();
 
-  // Ensure window is strictly scrolled to the top when navigating here
+  // Ensure window is strictly scrolled to the top when navigating here without an anchor
   useEffect(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    scrollToPosition(0, true);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      scrollToPosition(0, true);
+    }
   }, []);
 
   // Mode switcher per plugin: 'screenshot' (default if available) or 'dsp'
@@ -85,9 +87,10 @@ export const PluginsPage: React.FC = () => {
           {pluginsList.map((plugin, idx) => (
             <GlassCard
               key={plugin.id}
+              id={plugin.id}
               hoverEffect={true}
               glowOnHover={true}
-              className="p-6 sm:p-10 lg:p-12 border border-white/10 bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-transparent relative overflow-hidden"
+              className="scroll-mt-28 p-6 sm:p-10 lg:p-12 border border-white/10 bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-transparent relative overflow-hidden"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 {/* Left Column: Specs & Copy */}

@@ -3,17 +3,14 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { I18nProvider } from './i18n/I18nContext';
 import { HomePage } from './pages/HomePage';
 import { PluginsPage } from './pages/PluginsPage';
-import { useSmoothScroll, scrollToPosition } from './hooks/useSmoothScroll';
+import { useSmoothScroll, scrollToPosition, scrollToTarget } from './hooks/useSmoothScroll';
 
 const ScrollToTop: React.FC = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
     if (hash) {
-      const timer = setTimeout(() => {
-        scrollToPosition(hash, false);
-      }, 100);
-      return () => clearTimeout(timer);
+      scrollToTarget(hash, { immediate: false, offset: -70 });
     } else {
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;

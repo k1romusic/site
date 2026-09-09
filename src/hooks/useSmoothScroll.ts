@@ -12,7 +12,11 @@ export function scrollToPosition(target: number | string, immediate: boolean = f
 
   const lenis = window.__lenis;
   if (lenis) {
-    lenis.scrollTo(target, { immediate });
+    lenis.resize();
+    lenis.scrollTo(target, {
+      immediate,
+      offset: -70,
+    });
   } else {
     if (typeof target === 'number') {
       window.scrollTo({
@@ -22,14 +26,69 @@ export function scrollToPosition(target: number | string, immediate: boolean = f
     } else {
       const el = document.querySelector(target);
       if (el) {
-        el.scrollIntoView({
+        const top = el.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({
+          top: Math.max(0, top),
           behavior: immediate ? ('instant' as ScrollBehavior) : 'smooth',
-          block: 'start',
         });
       }
     }
   }
 }
+
+export function scrollToTarget(
+  target: string | number,
+  options: { immediate?: boolean; offset?: number } = {}
+) {
+  if (typeof window === 'undefined') return;
+
+  if (typeof target === 'number') {
+    scrollToPosition(target, options.immediate ?? false);
+    return;
+  }
+
+  const selector = target.startsWith('#') ? target : `#${target}`;
+  const offset = options.offset ?? -70;
+  const immediate = options.immediate ?? false;
+
+  let attempts = 0;
+  const maxAttempts = 15;
+
+  const tryScroll = () => {
+    attempts++;
+    const el = document.querySelector(selector) as HTMLElement | null;
+    if (!el) {
+      if (attempts < maxAttempts) {
+        setTimeout(tryScroll, 100);
+      }
+      return;
+    }
+
+    const lenis = window.__lenis;
+    if (lenis) {
+      lenis.resize();
+      lenis.scrollTo(el, {
+        offset,
+        immediate: attempts === 1 ? immediate : false,
+      });
+    } else {
+      const rect = el.getBoundingClientRect();
+      const top = rect.top + window.scrollY + offset;
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: immediate && attempts === 1 ? 'instant' : 'smooth',
+      });
+    }
+
+    // Continue verifying position as dynamic sections, fonts and images settle
+    if (attempts < 6) {
+      setTimeout(tryScroll, 150);
+    }
+  };
+
+  requestAnimationFrame(tryScroll);
+}
+
 
 export function useSmoothScroll(enabled: boolean = true) {
   useEffect(() => {
