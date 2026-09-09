@@ -74,7 +74,7 @@ export const ServicesSection: React.FC = () => {
           {servicesList.map((service, idx) => {
             const isAiTools = service.id === 'ai-tools';
             const isVoice = service.id === 'ai-voice-production';
-            const cardLink = isAiTools ? '#plugins' : '#contact';
+            const cardLink = isAiTools ? '/plugins' : '#contact';
 
             return (
               <motion.div

@@ -5,7 +5,6 @@ import { Header } from '../components/layout/Header';
 import { ServicesSection } from '../sections/ServicesSection';
 import { SelectedWorksSection } from '../sections/SelectedWorksSection';
 import { AiToolsOverviewSection } from '../sections/AiToolsOverviewSection';
-import { FeaturedPluginsSection } from '../sections/FeaturedPluginsSection';
 import { AboutSection } from '../sections/AboutSection';
 import { ContactCtaSection } from '../sections/ContactCtaSection';
 import { Footer } from '../components/layout/Footer';
@@ -34,13 +33,10 @@ export const HomePage: React.FC = () => {
         {/* 3. Selected Works (Audio Portfolio Carousel - 6 items) */}
         <SelectedWorksSection />
 
-        {/* 4. AI Tools Overview (Compact banner with miniatures) */}
+        {/* 4. AI Tools Overview (Compact banner with miniatures leading to dedicated /plugins page) */}
         <AiToolsOverviewSection />
 
-        {/* 5. Detailed Plugins Showcase (3 plugins with full features & screenshot modals) */}
-        <FeaturedPluginsSection />
-
-        {/* 6. Contact CTA (3 identical buttons: TG, VK, Email with 'Написать') */}
+        {/* 5. Contact CTA (3 identical buttons: TG, VK, Email with 'Написать') */}
         <ContactCtaSection />
       </main>
 

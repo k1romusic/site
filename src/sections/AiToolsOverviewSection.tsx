@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n/I18nContext';
 import { GlassCard } from '../components/ui/GlassCard';
 import { Cpu, ArrowRight, Eye } from 'lucide-react';
@@ -45,7 +46,7 @@ export const AiToolsOverviewSection: React.FC = () => {
 
   return (
     <section id="ai-tools-overview" className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
-      <a href="#plugins" className="block group cursor-pointer">
+      <Link to="/plugins" className="block group cursor-pointer">
         <GlassCard
           hoverEffect={true}
           glowOnHover={true}
@@ -134,7 +135,7 @@ export const AiToolsOverviewSection: React.FC = () => {
             </div>
           </div>
         </GlassCard>
-      </a>
+      </Link>
     </section>
   );
 };
