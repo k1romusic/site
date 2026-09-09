@@ -10,10 +10,10 @@ export const brandConfig = {
   },
   announcement: {
     active: true,
-    badge: { ru: 'DSP & AI', en: 'DSP & AI' },
+    badge: { ru: '', en: '' },
     text: {
-      ru: 'K1RO DSP SUITE: AI Voice, Synchrovoice и Stem Studio — новое поколение аудио-инструментов',
-      en: 'K1RO DSP SUITE: AI Voice, Synchrovoice & Stem Studio — next-gen neural audio instruments'
+      ru: 'AI Voice, Stem Studio, Synchrovoice. Новое поколение AI инструментов.',
+      en: 'AI Voice, Stem Studio, Synchrovoice. Next generation AI tools.'
     },
     link: '#plugins'
   },

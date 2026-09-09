@@ -58,7 +58,7 @@ export const en = {
     badge: 'COLLABORATION',
     title: 'HAVE A PROJECT?',
     lead: 'LET’S CREATE SOMETHING WORTH HEARING.',
-    button: 'GET IN TOUCH',
+    button: 'ORDER',
     directTg: 'Message directly via Telegram'
   },
   footer: {

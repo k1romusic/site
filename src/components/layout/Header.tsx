@@ -50,10 +50,10 @@ export const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo Branding */}
           <a href="#" className="flex items-center gap-3 group">
-            <span className="text-2xl sm:text-3xl font-black tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] to-[#b38800] group-hover:opacity-90 transition-opacity">
-              K1RO
+            <span className="text-xl sm:text-2xl font-black tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] to-[#b38800] group-hover:opacity-90 transition-opacity whitespace-nowrap">
+              K1RO MUSIC
             </span>
-            <AudioVisualizerLogo size="sm" animated={true} className="hidden sm:inline-flex opacity-80 group-hover:opacity-100 transition-opacity" />
+            <AudioVisualizerLogo size="sm" animated={true} className="inline-flex opacity-90 group-hover:opacity-100 transition-opacity" />
           </a>
 
           {/* Desktop Navigation */}
@@ -109,9 +109,12 @@ export const Header: React.FC = () => {
           >
             {/* Top Bar inside Menu */}
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <span className="text-2xl font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] to-[#b38800]">
-                K1RO
-              </span>
+              <div className="flex items-center gap-2.5">
+                <span className="text-xl font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] to-[#b38800]">
+                  K1RO MUSIC
+                </span>
+                <AudioVisualizerLogo size="sm" animated={true} />
+              </div>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
