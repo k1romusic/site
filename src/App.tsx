@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { I18nProvider } from './i18n/I18nContext';
 import { HomePage } from './pages/HomePage';
@@ -7,15 +7,29 @@ import { useSmoothScroll, scrollToPosition, scrollToTarget } from './hooks/useSm
 
 const ScrollToTop: React.FC = () => {
   const { pathname, hash } = useLocation();
+  const prevPathRef = useRef(pathname);
 
   useEffect(() => {
-    if (hash) {
-      scrollToTarget(hash, { immediate: false, offset: -70 });
-    } else {
+    const isNewPage = prevPathRef.current !== pathname;
+    prevPathRef.current = pathname;
+
+    if (isNewPage) {
+      // 1. Immediately reset scroll position when opening a new page
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
       scrollToPosition(0, true);
+    }
+
+    if (hash) {
+      // 2. If navigating to an anchor, wait briefly for new page DOM to mount, then smooth scroll
+      const delay = isNewPage ? 160 : 10;
+      const timer = setTimeout(() => {
+        scrollToTarget(hash, { immediate: false, offset: -80 });
+      }, delay);
+      return () => clearTimeout(timer);
+    } else if (!isNewPage) {
+      scrollToPosition(0, false);
     }
   }, [pathname, hash]);
 

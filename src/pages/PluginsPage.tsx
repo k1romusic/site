@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n/I18nContext';
 import { pluginsList } from '../data/plugins';
 import { AmbientBackdrop } from '../components/ui/AmbientBackdrop';
 import { Header } from '../components/layout/Header';
+import { ContactCtaSection } from '../sections/ContactCtaSection';
 import { Footer } from '../components/layout/Footer';
 import { GlassCard } from '../components/ui/GlassCard';
 import { Button } from '../components/ui/Button';
 import { Download, MessageSquare, Check, Cpu, Sliders, Mic, Split, Activity, Eye, Image as ImageIcon, X, ArrowLeft } from 'lucide-react';
-import { scrollToPosition } from '../hooks/useSmoothScroll';
 
 export const PluginsPage: React.FC = () => {
   const { lang, t } = useTranslation();
 
-  // Ensure window is strictly scrolled to the top when navigating here without an anchor
-  useEffect(() => {
-    if (!window.location.hash) {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      scrollToPosition(0, true);
-    }
-  }, []);
 
   // Mode switcher per plugin: 'screenshot' (default if available) or 'dsp'
   const [activeTabMode, setActiveTabMode] = useState<Record<string, 'screenshot' | 'dsp'>>({
@@ -452,6 +443,9 @@ export const PluginsPage: React.FC = () => {
           </div>
         )}
       </main>
+ 
+      {/* Contact Section */}
+      <ContactCtaSection />
 
       <Footer />
     </div>

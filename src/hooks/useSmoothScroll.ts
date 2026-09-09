@@ -15,7 +15,9 @@ export function scrollToPosition(target: number | string, immediate: boolean = f
     lenis.resize();
     lenis.scrollTo(target, {
       immediate,
-      offset: -70,
+      offset: -80,
+      duration: 1.1,
+      force: true,
     });
   } else {
     if (typeof target === 'number') {
@@ -26,7 +28,7 @@ export function scrollToPosition(target: number | string, immediate: boolean = f
     } else {
       const el = document.querySelector(target);
       if (el) {
-        const top = el.getBoundingClientRect().top + window.scrollY - 70;
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
         window.scrollTo({
           top: Math.max(0, top),
           behavior: immediate ? ('instant' as ScrollBehavior) : 'smooth',
@@ -38,7 +40,7 @@ export function scrollToPosition(target: number | string, immediate: boolean = f
 
 export function scrollToTarget(
   target: string | number,
-  options: { immediate?: boolean; offset?: number } = {}
+  options: { immediate?: boolean; offset?: number; onComplete?: () => void } = {}
 ) {
   if (typeof window === 'undefined') return;
 
@@ -48,18 +50,14 @@ export function scrollToTarget(
   }
 
   const selector = target.startsWith('#') ? target : `#${target}`;
-  const offset = options.offset ?? -70;
+  const offset = options.offset ?? -80;
   const immediate = options.immediate ?? false;
 
-  let attempts = 0;
-  const maxAttempts = 15;
-
-  const tryScroll = () => {
-    attempts++;
+  const attemptScroll = (retryCount: number = 0) => {
     const el = document.querySelector(selector) as HTMLElement | null;
     if (!el) {
-      if (attempts < maxAttempts) {
-        setTimeout(tryScroll, 100);
+      if (retryCount < 10) {
+        setTimeout(() => attemptScroll(retryCount + 1), 80);
       }
       return;
     }
@@ -69,25 +67,27 @@ export function scrollToTarget(
       lenis.resize();
       lenis.scrollTo(el, {
         offset,
-        immediate: attempts === 1 ? immediate : false,
+        immediate,
+        duration: 1.1,
+        force: true,
+        onComplete: () => {
+          options.onComplete?.();
+        },
       });
     } else {
       const rect = el.getBoundingClientRect();
       const top = rect.top + window.scrollY + offset;
       window.scrollTo({
         top: Math.max(0, top),
-        behavior: immediate && attempts === 1 ? 'instant' : 'smooth',
+        behavior: immediate ? 'instant' : 'smooth',
       });
-    }
-
-    // Continue verifying position as dynamic sections, fonts and images settle
-    if (attempts < 6) {
-      setTimeout(tryScroll, 150);
+      options.onComplete?.();
     }
   };
 
-  requestAnimationFrame(tryScroll);
+  requestAnimationFrame(() => attemptScroll(0));
 }
+
 
 
 export function useSmoothScroll(enabled: boolean = true) {

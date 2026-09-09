@@ -49,6 +49,7 @@ export const Header: React.FC = () => {
 
   const getHref = (target: string, isPage: boolean) => {
     if (isPage) return `${import.meta.env.BASE_URL}plugins`;
+    if (target === 'contact') return '#contact';
     return isHomePage ? `#${target}` : `${import.meta.env.BASE_URL}#${target}`;
   };
 
@@ -62,8 +63,10 @@ export const Header: React.FC = () => {
         navigate('/plugins');
       }
     } else {
-      if (isHomePage) {
-        scrollToTarget(target, { immediate: false, offset: -70 });
+      if (target === 'contact') {
+        scrollToTarget('contact', { immediate: false, offset: -80 });
+      } else if (isHomePage) {
+        scrollToTarget(target, { immediate: false, offset: -80 });
       } else {
         navigate(`/#${target}`);
       }
@@ -81,11 +84,7 @@ export const Header: React.FC = () => {
 
   const handleCtaClick = () => {
     setMobileMenuOpen(false);
-    if (isHomePage) {
-      scrollToTarget('contact', { immediate: false, offset: -70 });
-    } else {
-      navigate('/#contact');
-    }
+    scrollToTarget('contact', { immediate: false, offset: -80 });
   };
 
   return (

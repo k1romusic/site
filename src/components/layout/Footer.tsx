@@ -29,8 +29,10 @@ export const Footer: React.FC = () => {
         navigate('/plugins');
       }
     } else {
-      if (isHomePage) {
-        scrollToTarget(target, { immediate: false, offset: -70 });
+      if (target === 'contact') {
+        scrollToTarget('contact', { immediate: false, offset: -80 });
+      } else if (isHomePage) {
+        scrollToTarget(target, { immediate: false, offset: -80 });
       } else {
         navigate(`/#${target}`);
       }
