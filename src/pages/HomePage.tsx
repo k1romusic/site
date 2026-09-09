@@ -5,7 +5,6 @@ import { Header } from '../components/layout/Header';
 import { ServicesSection } from '../sections/ServicesSection';
 import { SelectedWorksSection } from '../sections/SelectedWorksSection';
 import { AiToolsOverviewSection } from '../sections/AiToolsOverviewSection';
-import { FeaturedPluginsSection } from '../sections/FeaturedPluginsSection';
 import { AboutSection } from '../sections/AboutSection';
 import { ContactCtaSection } from '../sections/ContactCtaSection';
 import { Footer } from '../components/layout/Footer';
@@ -25,26 +24,23 @@ export const HomePage: React.FC = () => {
 
       {/* Main Sections */}
       <main className="flex-1 relative z-10">
-        {/* 1. Services (What I do / Чем я могу быть полезен) */}
-        <ServicesSection />
-
-        {/* 2. Selected Works (Audio Portfolio Carousel - 6 items) */}
-        <SelectedWorksSection />
-
-        {/* 3. AI Tools Overview (Clickable Banner leading to #plugins) */}
-        <AiToolsOverviewSection />
-
-        {/* 4. Featured Plugins (Detailed VST/AU instruments & screenshots) */}
-        <FeaturedPluginsSection />
-
-        {/* 5. About & Philosophy */}
+        {/* 1. About & Philosophy (10+ Years of Precision, Stats) */}
         <AboutSection />
 
-        {/* 6. Contact CTA (3 identical buttons: TG, VK, Email) */}
+        {/* 2. Services (What I do / Чем я могу быть полезен) */}
+        <ServicesSection />
+
+        {/* 3. Selected Works (Audio Portfolio Carousel - 6 items) */}
+        <SelectedWorksSection />
+
+        {/* 4. AI Tools Overview (Showcase with thumbnails leading to /plugins) */}
+        <AiToolsOverviewSection />
+
+        {/* 5. Contact CTA (3 identical buttons: TG, VK, Email with 'Написать') */}
         <ContactCtaSection />
       </main>
 
-      {/* 9. Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );
