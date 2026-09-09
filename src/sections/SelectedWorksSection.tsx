@@ -67,41 +67,63 @@ export const SelectedWorksSection: React.FC = () => {
           </h2>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold">
-          <button
-            type="button"
-            onClick={() => setSelectedFilter('all')}
-            className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
-              selectedFilter === 'all'
-                ? 'bg-[#FFC300] text-black font-bold shadow-md'
-                : 'text-white/60 hover:text-white'
-            }`}
-          >
-            Все работы
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedFilter('production')}
-            className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
-              selectedFilter === 'production'
-                ? 'bg-[#FFC300] text-black font-bold shadow-md'
-                : 'text-white/60 hover:text-white'
-            }`}
-          >
-            Продакшн
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedFilter('mixing')}
-            className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
-              selectedFilter === 'mixing'
-                ? 'bg-[#FFC300] text-black font-bold shadow-md'
-                : 'text-white/60 hover:text-white'
-            }`}
-          >
-            Сведение & Мастер
-          </button>
+        {/* Filter Pills & Carousel Arrows */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => setSelectedFilter('all')}
+              className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
+                selectedFilter === 'all'
+                  ? 'bg-[#FFC300] text-black font-bold shadow-md'
+                  : 'text-white/60 hover:text-white'
+              }`}
+            >
+              Все работы
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedFilter('production')}
+              className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
+                selectedFilter === 'production'
+                  ? 'bg-[#FFC300] text-black font-bold shadow-md'
+                  : 'text-white/60 hover:text-white'
+              }`}
+            >
+              Продакшн
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedFilter('mixing')}
+              className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
+                selectedFilter === 'mixing'
+                  ? 'bg-[#FFC300] text-black font-bold shadow-md'
+                  : 'text-white/60 hover:text-white'
+              }`}
+            >
+              Сведение & Мастер
+            </button>
+          </div>
+
+          {/* Desktop Carousel Left / Right Arrows */}
+          <div className="hidden sm:flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => scrollCarousel('left')}
+              aria-label="Листать треки влево"
+              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFC300] hover:bg-[#FFC300]/10 text-white hover:text-[#FFC300] transition-all cursor-pointer active:scale-95"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollCarousel('right')}
+              aria-label="Листать треки вправо"
+              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFC300] hover:bg-[#FFC300]/10 text-white hover:text-[#FFC300] transition-all cursor-pointer active:scale-95"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 

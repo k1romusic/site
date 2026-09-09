@@ -15,7 +15,7 @@ export const brandConfig = {
       ru: 'AI Voice, Stem Studio, Synchrovoice. Новое поколение AI инструментов.',
       en: 'AI Voice, Stem Studio, Synchrovoice. Next generation AI tools.'
     },
-    link: '/plugins'
+    link: '#plugins'
   },
   about: {
     title: {

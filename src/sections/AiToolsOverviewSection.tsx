@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n/I18nContext';
 import { GlassCard } from '../components/ui/GlassCard';
-import { Cpu, ArrowRight, Sparkles, Eye } from 'lucide-react';
+import { Cpu, ArrowRight, Eye } from 'lucide-react';
 
 export const AiToolsOverviewSection: React.FC = () => {
   const { lang } = useTranslation();
@@ -46,7 +45,7 @@ export const AiToolsOverviewSection: React.FC = () => {
 
   return (
     <section id="ai-tools-overview" className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
-      <Link to="/plugins" className="block group cursor-pointer">
+      <a href="#plugins" className="block group cursor-pointer">
         <GlassCard
           hoverEffect={true}
           glowOnHover={true}
@@ -77,9 +76,9 @@ export const AiToolsOverviewSection: React.FC = () => {
                 </h2>
               </div>
 
-              {/* Action Button */}
+              {/* Action Button: Jump down to plugins store */}
               <div className="inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#FFC300] to-[#e6b000] text-black font-black text-xs sm:text-sm uppercase tracking-wider group-hover:scale-105 active:scale-95 transition-all shadow-[0_0_25px_rgba(255,195,0,0.35)] shrink-0 self-start md:self-auto">
-                <span>{lang === 'ru' ? 'Перейти в витрину плагинов' : 'Open Plugins Showcase'}</span>
+                <span>{lang === 'ru' ? 'Перейти в магазин плагинов' : 'Go to Plugins Store'}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </div>
             </div>
@@ -133,20 +132,9 @@ export const AiToolsOverviewSection: React.FC = () => {
                 </div>
               ))}
             </div>
-
-            {/* Bottom footnote */}
-            <div className="flex items-center justify-between text-xs font-mono text-white/50 pt-2">
-              <span className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#FFC300]" />
-                {lang === 'ru' ? 'Витрина с демо-монитором, скриншотами и ценами' : 'Live showroom with DSP monitors & screenshots'}
-              </span>
-              <span className="text-[#FFC300] font-bold group-hover:underline">
-                {lang === 'ru' ? 'Смотреть всю витрину →' : 'View all tools →'}
-              </span>
-            </div>
           </div>
         </GlassCard>
-      </Link>
+      </a>
     </section>
   );
 };
