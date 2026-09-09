@@ -4,15 +4,14 @@ import { worksList } from '../data/works';
 import { WorkItem } from '../types/work';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
 import { GlobalAudioBar } from '../components/audio/GlobalAudioBar';
-import { Play, Pause, Shuffle, Music, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, Pause, Music, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const SelectedWorksSection: React.FC = () => {
-  const { lang, t } = useTranslation();
+  const { lang } = useTranslation();
   const { activeId, isPlaying, progress, currentTimeFormatted, toggleTrack, seek, stopTrack } = useAudioPlayer();
 
   // Filter category state
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'production' | 'mixing'>('all');
-  const [shuffleKey, setShuffleKey] = useState<number>(0);
 
   // Carousel container ref for scrolling
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -22,7 +21,7 @@ export const SelectedWorksSection: React.FC = () => {
     return worksList.find((w) => w.id === activeId) || null;
   }, [activeId]);
 
-  // Randomized list
+  // Randomized list on load
   const randomizedWorks = useMemo(() => {
     const list = [...worksList];
     for (let i = list.length - 1; i > 0; i--) {
@@ -30,7 +29,7 @@ export const SelectedWorksSection: React.FC = () => {
       [list[i], list[j]] = [list[j], list[i]];
     }
     return list;
-  }, [shuffleKey]);
+  }, []);
 
   // Filtered by category
   const filteredWorks = useMemo(() => {
@@ -63,86 +62,46 @@ export const SelectedWorksSection: React.FC = () => {
       {/* Header & Controls */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#FFC300] block">
-              {t.works.badge}
-            </span>
-            <span className="px-2 py-0.5 rounded-full bg-[#FFC300]/10 border border-[#FFC300]/20 text-[10px] font-mono text-[#FFC300]">
-              {filteredWorks.length} ТРЕКОВ
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[#F5F0E8] uppercase">
-            {t.works.title}
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#F5F0E8] uppercase">
+            {lang === 'ru' ? 'ПОРТФОЛИО' : 'PORTFOLIO'}
           </h2>
         </div>
 
-        {/* Filter Pills, Shuffle & Carousel Arrows */}
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold">
-            <button
-              type="button"
-              onClick={() => setSelectedFilter('all')}
-              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                selectedFilter === 'all'
-                  ? 'bg-[#FFC300] text-black font-bold shadow-md'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              Все работы
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedFilter('production')}
-              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                selectedFilter === 'production'
-                  ? 'bg-[#FFC300] text-black font-bold shadow-md'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              Продакшн
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedFilter('mixing')}
-              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                selectedFilter === 'mixing'
-                  ? 'bg-[#FFC300] text-black font-bold shadow-md'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              Сведение & Мастер
-            </button>
-          </div>
-
+        {/* Filter Pills */}
+        <div className="flex items-center p-1 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold">
           <button
             type="button"
-            onClick={() => setShuffleKey((prev) => prev + 1)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFC300] hover:text-[#FFC300] text-xs font-semibold text-[#F5F0E8] transition-all cursor-pointer hover:scale-105"
-            title="Перемешать порядок"
+            onClick={() => setSelectedFilter('all')}
+            className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
+              selectedFilter === 'all'
+                ? 'bg-[#FFC300] text-black font-bold shadow-md'
+                : 'text-white/60 hover:text-white'
+            }`}
           >
-            <Shuffle className="w-3.5 h-3.5 text-[#FFC300]" />
-            <span className="hidden sm:inline">Случайно</span>
+            Все работы
           </button>
-
-          {/* Carousel Left / Right Navigation Buttons */}
-          <div className="flex items-center gap-1.5 ml-1">
-            <button
-              type="button"
-              onClick={() => scrollCarousel('left')}
-              aria-label="Листать треки влево"
-              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFC300] hover:bg-[#FFC300]/10 text-white hover:text-[#FFC300] transition-all cursor-pointer active:scale-95"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollCarousel('right')}
-              aria-label="Листать треки вправо"
-              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFC300] hover:bg-[#FFC300]/10 text-white hover:text-[#FFC300] transition-all cursor-pointer active:scale-95"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setSelectedFilter('production')}
+            className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
+              selectedFilter === 'production'
+                ? 'bg-[#FFC300] text-black font-bold shadow-md'
+                : 'text-white/60 hover:text-white'
+            }`}
+          >
+            Продакшн
+          </button>
+          <button
+            type="button"
+            onClick={() => setSelectedFilter('mixing')}
+            className={`px-3.5 py-2 rounded-lg transition-all cursor-pointer ${
+              selectedFilter === 'mixing'
+                ? 'bg-[#FFC300] text-black font-bold shadow-md'
+                : 'text-white/60 hover:text-white'
+            }`}
+          >
+            Сведение & Мастер
+          </button>
         </div>
       </div>
 
