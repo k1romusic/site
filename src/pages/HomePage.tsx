@@ -4,6 +4,7 @@ import { AnnouncementBar } from '../components/layout/AnnouncementBar';
 import { Header } from '../components/layout/Header';
 import { ServicesSection } from '../sections/ServicesSection';
 import { SelectedWorksSection } from '../sections/SelectedWorksSection';
+import { AiToolsOverviewSection } from '../sections/AiToolsOverviewSection';
 import { FeaturedPluginsSection } from '../sections/FeaturedPluginsSection';
 import { AboutSection } from '../sections/AboutSection';
 import { ContactCtaSection } from '../sections/ContactCtaSection';
@@ -24,19 +25,22 @@ export const HomePage: React.FC = () => {
 
       {/* Main Sections */}
       <main className="flex-1 relative z-10">
-        {/* 1. Selected Works (Audio Portfolio) */}
-        <SelectedWorksSection />
-
-        {/* 2. Services */}
+        {/* 1. Services (What I do / Чем я могу быть полезен) */}
         <ServicesSection />
 
-        {/* 3. Featured Plugins */}
+        {/* 2. Selected Works (Audio Portfolio Carousel - 6 items) */}
+        <SelectedWorksSection />
+
+        {/* 3. AI Tools Overview (Clickable Banner leading to #plugins) */}
+        <AiToolsOverviewSection />
+
+        {/* 4. Featured Plugins (Detailed VST/AU instruments & screenshots) */}
         <FeaturedPluginsSection />
 
-        {/* 7. About & Credibility */}
+        {/* 5. About & Philosophy */}
         <AboutSection />
 
-        {/* 8. Final CTA */}
+        {/* 6. Contact CTA (3 identical buttons: TG, VK, Email) */}
         <ContactCtaSection />
       </main>
 

@@ -1,20 +1,50 @@
 import React from 'react';
 import { useTranslation } from '../i18n/I18nContext';
 import { brandConfig } from '../data/brand';
-import { Button } from '../components/ui/Button';
-import { Send, Mail, Sparkles, MessageSquare } from 'lucide-react';
+import { Send, Mail, Sparkles, MessageSquare, ArrowUpRight } from 'lucide-react';
 
 export const ContactCtaSection: React.FC = () => {
-  const { t } = useTranslation();
+  const { lang, t } = useTranslation();
+
+  const contactButtons = [
+    {
+      id: 'telegram',
+      name: 'Telegram',
+      handle: '@denk1ro',
+      url: brandConfig.contacts.telegram,
+      icon: <Send className="w-5 h-5 text-[#FFC300]" />,
+      desc: lang === 'ru' ? 'Быстрый ответ в мессенджере' : 'Fast chat response'
+    },
+    {
+      id: 'vk',
+      name: 'ВКонтакте',
+      handle: 'vk.ru/denk1ro',
+      url: brandConfig.contacts.vk,
+      icon: (
+        <span className="w-5 h-5 rounded-full bg-[#FFC300]/20 flex items-center justify-center font-bold text-xs text-[#FFC300]">
+          VK
+        </span>
+      ),
+      desc: lang === 'ru' ? 'Личные сообщения сообщества' : 'Direct community message'
+    },
+    {
+      id: 'email',
+      name: 'Email почта',
+      handle: brandConfig.contacts.email,
+      url: `mailto:${brandConfig.contacts.email}`,
+      icon: <Mail className="w-5 h-5 text-[#FFC300]" />,
+      desc: lang === 'ru' ? 'Официальные запросы & стемы' : 'Official inquiry & stems'
+    }
+  ];
 
   return (
-    <section id="contact" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center border-t border-white/5">
-      <div className="relative rounded-3xl p-8 sm:p-14 lg:p-16 bg-gradient-to-b from-white/[0.04] to-white/[0.01] border border-white/10 overflow-hidden shadow-2xl">
+    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center border-t border-white/5">
+      <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent border border-white/10 overflow-hidden shadow-2xl">
         {/* Glow Behind */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-[450px] h-80 sm:h-[450px] bg-[#FFC300]/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative z-10 flex flex-col items-center">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFC300]/15 text-[#FFC300] text-xs font-bold uppercase tracking-[0.2em] border border-[#FFC300]/30 mb-6">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFC300]/15 text-[#FFC300] text-xs font-bold uppercase tracking-[0.2em] border border-[#FFC300]/30 mb-5">
             <Sparkles className="w-3.5 h-3.5" />
             {t.cta.badge}
           </span>
@@ -27,57 +57,49 @@ export const ContactCtaSection: React.FC = () => {
             {t.cta.lead}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-            <a
-              href={brandConfig.contacts.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto"
-            >
-              <Button
-                variant="gold"
-                size="lg"
-                glow={true}
-                icon={<Send className="w-5 h-5" />}
-                className="w-full sm:w-auto"
+          {/* 3 Identical Contact Buttons */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+            {contactButtons.map((btn) => (
+              <a
+                key={btn.id}
+                href={btn.url}
+                target={btn.id !== 'email' ? '_blank' : undefined}
+                rel={btn.id !== 'email' ? 'noopener noreferrer' : undefined}
+                className="group relative flex flex-col justify-between p-6 rounded-2xl bg-white/5 hover:bg-white/[0.08] border border-white/10 hover:border-[#FFC300]/60 transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer text-left"
               >
-                {t.cta.directTg}
-              </Button>
-            </a>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#FFC300]/10 group-hover:border-[#FFC300]/40 transition-colors">
+                    {btn.icon}
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:text-[#FFC300] group-hover:bg-[#FFC300]/10 transition-colors">
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
+                </div>
 
-            <a
-              href={brandConfig.contacts.vk}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto"
-            >
-              <Button
-                variant="glass"
-                size="lg"
-                className="w-full sm:w-auto hover:border-[#FFC300]/50"
-              >
-                VK: @denk1ro
-              </Button>
-            </a>
+                <div>
+                  <h3 className="text-base font-black uppercase text-[#F5F0E8] group-hover:text-[#FFC300] transition-colors mb-1">
+                    {btn.name}
+                  </h3>
+                  <p className="text-xs font-mono text-[#FFC300]/90 truncate font-semibold mb-1">
+                    {btn.handle}
+                  </p>
+                  <p className="text-[11px] text-white/50">
+                    {btn.desc}
+                  </p>
+                </div>
 
-            <a
-              href={`mailto:${brandConfig.contacts.email}`}
-              className="w-full sm:w-auto"
-            >
-              <Button
-                variant="glass"
-                size="lg"
-                icon={<Mail className="w-5 h-5 text-[#FFC300]" />}
-                className="w-full sm:w-auto"
-              >
-                {brandConfig.contacts.email}
-              </Button>
-            </a>
+                {/* Subtle bottom line */}
+                <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/40 group-hover:text-[#FFC300]/70 transition-colors">
+                  <span>Связаться</span>
+                  <span>Direct Link</span>
+                </div>
+              </a>
+            ))}
           </div>
 
-          <div className="mt-8 flex items-center gap-2 text-xs font-mono text-white/40">
+          <div className="mt-10 flex items-center gap-2 text-xs font-mono text-white/40">
             <MessageSquare className="w-3.5 h-3.5 text-[#FFC300]" />
-            <span>Average response time: under 2 hours</span>
+            <span>Среднее время ответа: в течение 1–2 часов</span>
           </div>
         </div>
       </div>

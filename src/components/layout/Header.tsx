@@ -31,8 +31,8 @@ export const Header: React.FC = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: t.nav.works, href: '#works' },
     { label: t.nav.services, href: '#services' },
+    { label: t.nav.works, href: '#works' },
     { label: t.nav.plugins, href: '#plugins' },
     { label: t.nav.about, href: '#about' },
     { label: t.nav.contact, href: '#contact' },
