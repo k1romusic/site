@@ -1,15 +1,40 @@
 import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n/I18nContext';
 import { brandConfig } from '../../data/brand';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { AudioVisualizerLogo } from '../ui/AudioVisualizerLogo';
 import { ArrowUp } from 'lucide-react';
+import { scrollToPosition } from '../../hooks/useSmoothScroll';
 
 export const Footer: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isHomePage =
+    location.pathname === '/' ||
+    location.pathname === '/ru' ||
+    location.pathname === '/en';
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToPosition(0, false);
+  };
+
+  const handleNavClick = (target: string, isPage: boolean) => {
+    if (isPage) {
+      if (location.pathname === '/plugins') {
+        scrollToPosition(0, false);
+      } else {
+        navigate('/plugins');
+      }
+    } else {
+      if (isHomePage) {
+        scrollToPosition(`#${target}`, false);
+      } else {
+        navigate(`/#${target}`);
+      }
+    }
   };
 
   return (
@@ -18,12 +43,15 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12 border-b border-white/10">
           {/* Col 1: Brand Info */}
           <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-3 group cursor-pointer"
+            >
               <span className="text-3xl font-black tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] to-[#b38800]">
-                K1RO
+                K1RO MUSIC
               </span>
               <AudioVisualizerLogo size="sm" animated={false} />
-            </div>
+            </Link>
             <p className="text-sm max-w-md text-[#F5F0E8]/60 leading-relaxed">
               {brandConfig.about.lead.ru}
             </p>
@@ -39,22 +67,53 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a href="#works" className="hover:text-[#FFC300] transition-colors">{t.nav.works}</a>
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('works', false)}
+                  className="hover:text-[#FFC300] transition-colors cursor-pointer"
+                >
+                  {t.nav.works}
+                </button>
               </li>
               <li>
-                <a href="#services" className="hover:text-[#FFC300] transition-colors">{t.nav.services}</a>
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('services', false)}
+                  className="hover:text-[#FFC300] transition-colors cursor-pointer"
+                >
+                  {t.nav.services}
+                </button>
               </li>
               <li>
-                <a href="#plugins" className="hover:text-[#FFC300] transition-colors">{t.nav.plugins}</a>
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('/plugins', true)}
+                  className="hover:text-[#FFC300] transition-colors cursor-pointer text-left"
+                >
+                  {t.nav.plugins}
+                </button>
               </li>
               <li>
-                <a href="#about" className="hover:text-[#FFC300] transition-colors">{t.nav.about}</a>
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('about', false)}
+                  className="hover:text-[#FFC300] transition-colors cursor-pointer"
+                >
+                  {t.nav.about}
+                </button>
               </li>
               <li>
-                <a href="#contact" className="hover:text-[#FFC300] transition-colors">{t.nav.contact}</a>
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('contact', false)}
+                  className="hover:text-[#FFC300] transition-colors cursor-pointer"
+                >
+                  {t.nav.contact}
+                </button>
               </li>
             </ul>
           </div>
+
 
           {/* Col 3: Socials & Connect */}
           <div>

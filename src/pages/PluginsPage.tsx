@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n/I18nContext';
 import { pluginsList } from '../data/plugins';
@@ -8,9 +8,18 @@ import { Footer } from '../components/layout/Footer';
 import { GlassCard } from '../components/ui/GlassCard';
 import { Button } from '../components/ui/Button';
 import { Download, MessageSquare, Check, Cpu, Sliders, Mic, Split, Activity, Eye, Image as ImageIcon, X, ArrowLeft } from 'lucide-react';
+import { scrollToPosition } from '../hooks/useSmoothScroll';
 
 export const PluginsPage: React.FC = () => {
   const { lang, t } = useTranslation();
+
+  // Ensure window is strictly scrolled to the top when navigating here
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    scrollToPosition(0, true);
+  }, []);
 
   // Mode switcher per plugin: 'screenshot' (default if available) or 'dsp'
   const [activeTabMode, setActiveTabMode] = useState<Record<string, 'screenshot' | 'dsp'>>({

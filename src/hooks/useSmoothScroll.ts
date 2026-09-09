@@ -1,6 +1,36 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
+export function scrollToPosition(target: number | string, immediate: boolean = false) {
+  if (typeof window === 'undefined') return;
+
+  const lenis = window.__lenis;
+  if (lenis) {
+    lenis.scrollTo(target, { immediate });
+  } else {
+    if (typeof target === 'number') {
+      window.scrollTo({
+        top: target,
+        behavior: immediate ? ('instant' as ScrollBehavior) : 'smooth',
+      });
+    } else {
+      const el = document.querySelector(target);
+      if (el) {
+        el.scrollIntoView({
+          behavior: immediate ? ('instant' as ScrollBehavior) : 'smooth',
+          block: 'start',
+        });
+      }
+    }
+  }
+}
+
 export function useSmoothScroll(enabled: boolean = true) {
   useEffect(() => {
     if (!enabled || typeof window === 'undefined') return;
@@ -19,6 +49,8 @@ export function useSmoothScroll(enabled: boolean = true) {
       touchMultiplier: 1.5,
     });
 
+    window.__lenis = lenis;
+
     let animationFrameId: number;
 
     function raf(time: number) {
@@ -31,6 +63,8 @@ export function useSmoothScroll(enabled: boolean = true) {
     return () => {
       cancelAnimationFrame(animationFrameId);
       lenis.destroy();
+      delete window.__lenis;
     };
   }, [enabled]);
 }
+
