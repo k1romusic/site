@@ -46,13 +46,17 @@ export const en = {
     latestVersion: 'Version'
   },
   about: {
-    badge: 'PHILOSOPHY & METRICS',
-    title: 'SOUND ARCHITECTURE',
-    subtitle: 'Music is ignited by emotion, but endures through flawless physics and mathematical precision.',
+    badge: 'ABOUT ME / 10+ YEARS EXPERIENCE',
+    title: 'PRODUCTION, CHARTS & AI INNOVATION',
+    subtitle: '10+ years engineering chart hits, releases on major labels, and cutting-edge neural vocal tech.',
+    labelsTitle: 'MAJOR LABEL RELEASES',
+    artistsTitle: 'ARTIST CREDITS & COLLABORATIONS',
+    showAllArtists: 'View All (30+ Artists)',
+    hideArtists: 'Show Less',
     yearsExp: 'Years of Studio Experience',
-    mixesCount: 'Commercial Releases & Mixes',
-    pluginsCount: 'Proprietary DSP Tools',
-    accuracy: 'Phase Coherence & Depth'
+    mixesCount: 'VK Chart Hits',
+    pluginsCount: 'Major Record Labels',
+    accuracy: 'AI Vocal Tech Pioneer'
   },
   cta: {
     badge: 'COLLABORATION',
