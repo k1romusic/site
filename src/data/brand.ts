@@ -19,21 +19,103 @@ export const brandConfig = {
   },
   about: {
     badge: {
-      ru: 'ОБО МНЕ / 10+ ЛЕТ ОПЫТА',
-      en: 'ABOUT ME / 10+ YEARS EXPERIENCE'
+      ru: 'K1RO',
+      en: 'K1RO'
     },
     title: {
-      ru: 'ПРОДАКШН И СВЕДЕНИЕ ДЛЯ ТОП-АРТИСТОВ И ПЕРВЫЕ В РФ ИИ-ВОКАЛЬНЫЕ ИННОВАЦИИ',
-      en: 'PRODUCTION & MIXING FOR TOP ARTISTS & FIRST-IN-CLASS AI VOCAL INNOVATIONS'
+      ru: 'SOUND & MUSIC PRODUCTION',
+      en: 'SOUND & MUSIC PRODUCTION'
     },
     lead: {
-      ru: 'K1RO — саунд-продюсер, звукорежиссер и разработчик аудиоплагинов с более чем 10-летним опытом. За плечами 2 трека в официальном чарте VK, релизы на крупнейших мировых и российских лейблах (Black Star, Warner Music, Sony Music, DNK Music) и глубокая интеграция нейросетей в музыкальный продакшн.',
-      en: 'K1RO is a music producer, mixing/mastering engineer, and audio DSP developer with 10+ years of studio experience. Backed by 2 tracks in the official VK charts, releases on major record labels (Black Star, Warner Music, Sony Music, DNK Music), and pioneering neural AI workflows in vocal production.'
+      ru: 'Более 10 лет создаю звук для артистов, релизов и музыкальных проектов. Работаю со сведением, вокальным продакшном, аранжировкой и созданием музыки. В работе сочетаю классический музыкальный продакшн с современными AI-инструментами.',
+      en: 'Over 10 years crafting sound for artists, major releases, and music projects. Specializing in mixing, vocal production, arrangement, and music creation. Combining classical studio engineering with cutting-edge AI tools.'
     },
     bio: {
-      ru: 'Работал с треками таких артистов, как Леша Свик, Слава КПСС, Kristina Si, FLESH, Bumble Beezy, Onlife, Джиос, PlayingTheAngel, Mozee Montana, Pra(Killa\'Gramm), Shot, H1GH, Ресторатор и десятков других. Являюсь одним из первых в России, кто начал на профессиональном студийном уровне внедрять ИИ-инструменты в создание музыки: от прецизионного клонирования тембра и написания песен голосами артистов без их прямого участия до разработки собственных DSP-плагинов.',
-      en: 'Engineered and produced records for prominent artists including Lesha Svik, Slava KPSS, Kristina Si, FLESH, Bumble Beezy, Onlife, Dzhios, PlayingTheAngel, Mozee Montana, Pra(Killa\'Gramm), Shot, H1GH, Restorator and many others. One of the early innovators in Russia introducing AI into real-world music production: neural vocal cloning, creating complete records in artists\' authentic voices without their physical presence, and developing proprietary VST3/AU DSP plugins.'
+      ru: 'Среди артистов — Лёша Свик, LXE, Слава КПСС, FLESH, Bumble Beezy, Kristina Si, Darom Dabro, Mozee Montana, PlayingTheAngel, Pra(Killa\'Gramm), YAMZY, Ресторатор и другие. Релизы выходили на BLACK STAR, Warner Music, Sony Music, SOUZ Music, DNK Music, CD Land, GAMMA Music и других лейблах.',
+      en: 'Credits include Lesha Svik, LXE, Slava KPSS, FLESH, Bumble Beezy, Kristina Si, Darom Dabro, Mozee Montana, PlayingTheAngel, Pra(Killa\'Gramm), YAMZY, Restorator and others. Releases distributed via BLACK STAR, Warner Music, Sony Music, SOUZ Music, DNK Music, CD Land, GAMMA Music and more.'
     },
+    aiOverview: {
+      title: {
+        ru: 'AI × MUSIC',
+        en: 'AI × MUSIC'
+      },
+      lead: {
+        ru: 'Один из первых специалистов в России, кто начал системно интегрировать AI в музыкальный продакшн и работу с вокалом. AI используется не ради хайпа, а как профессиональный инструмент для расширения возможностей музыкального производства.',
+        en: 'One of the first audio engineers in Russia to systematically integrate AI into music production and vocal workflows. AI is leveraged not as a novelty, but as a high-precision studio tool expanding creative and sonic boundaries.'
+      },
+      pillars: [
+        {
+          tag: 'AI VOCAL',
+          desc: {
+            ru: 'Работа с голосовыми моделями и современными AI-инструментами для вокала.',
+            en: 'Advanced neural vocal timbre modeling and modern AI tools for voice.'
+          }
+        },
+        {
+          tag: 'AI PRODUCTION',
+          desc: {
+            ru: 'Создание музыкального материала и новые подходы к музыкальному продакшну.',
+            en: 'Crafting original musical material and next-generation production pipelines.'
+          }
+        },
+        {
+          tag: 'AI MUSIC',
+          desc: {
+            ru: 'Создание песен, демо и нестандартных музыкальных решений с использованием AI.',
+            en: 'Full song composition, high-end demos, and custom creative sound solutions with AI.'
+          }
+        }
+      ]
+    },
+    featuredArtists: [
+      'Лёша Свик',
+      'LXE',
+      'Слава КПСС',
+      'FLESH',
+      'Bumble Beezy',
+      'Kristina Si',
+      'Darom Dabro',
+      'Mozee Montana',
+      'PlayingTheAngel',
+      'Pra(Killa\'Gramm)',
+      'YAMZY',
+      'Ресторатор'
+    ],
+    allArtists: [
+      'Лёша Свик',
+      'LXE',
+      'Onlife',
+      'Джиос',
+      'Gambit 13',
+      'Sanji',
+      'Chipachip',
+      'Дима Лелюк (КДК)',
+      'Pra(Killa\'Gramm)',
+      'YAMZY',
+      'Mozee Montana',
+      'PlayingTheAngel',
+      'Слава КПСС',
+      'Замай',
+      'Alex Gakagurskiy',
+      'GUT1K',
+      'Darom Dabro',
+      'FLESH',
+      'ENIQUE',
+      'Bumble Beezy',
+      'Kristina Si',
+      'ТА СТОРОНА',
+      'Shot',
+      'H1GH',
+      'Adamant',
+      'Vnuk',
+      'Эсчевский',
+      'Ресторатор',
+      'Ahimas [Легенды Про]',
+      'Аркайда',
+      'Beliy',
+      'StaFFорд63',
+      'Coolaga'
+    ],
     labels: [
       'BLACK STAR',
       'WARNER MUSIC',
@@ -47,61 +129,22 @@ export const brandConfig = {
       'GAMMA MUSIC',
       'A+'
     ],
-    artists: [
-      'Леша Свик',
-      'Слава КПСС',
-      'Kristina Si',
-      'FLESH',
-      'Bumble Beezy',
-      'Onlife',
-      'Джиос',
-      'PlayingTheAngel',
-      'Mozee Montana',
-      'Pra(Killa\'Gramm)',
-      'Shot',
-      'H1GH',
-      'Ресторатор',
-      'LXE',
-      'Дима Лелюк (КДК)',
-      'Замай',
-      'Gambit 13',
-      'Sanji',
-      'Сhipachip',
-      'YAMZY',
-      'Alex Gakagurskiy',
-      'GUT1K (ЛУЧШИЙ)',
-      'Darom Dabro',
-      'ENIQUE',
-      'ТА СТОРОНА',
-      'Adamant',
-      'Vnuk',
-      'Эсчевский',
-      'Ahimas [Легенды Про]',
-      'Аркайда',
-      'Beliy',
-      'StaFFорд63',
-      'Coolaga'
-    ],
     stats: [
       {
         value: '10+',
-        label: { ru: 'Лет опыта в индустрии', en: 'Years of audio mastery' },
-        description: { ru: 'Сотни коммерческих релизов и миксов', en: 'Hundreds of commercial releases & master mixes' }
+        label: { ru: 'ЛЕТ В ИНДУСТРИИ', en: 'YEARS IN INDUSTRY' }
       },
       {
-        value: 'ТОП-2',
-        label: { ru: 'Трека в чарте VK', en: 'Tracks in official VK charts' },
-        description: { ru: 'Миллионные стримы и ротации', en: 'Millions of streams & airplay' }
+        value: '30+',
+        label: { ru: 'АРТИСТОВ', en: 'ARTISTS' }
       },
       {
-        value: '11+',
-        label: { ru: 'Крупнейших лейблов', en: 'Major record labels' },
-        description: { ru: 'Black Star, Warner, Sony Music, DNK...', en: 'Black Star, Warner, Sony Music, DNK...' }
+        value: '10+',
+        label: { ru: 'ЛЕЙБЛОВ', en: 'RECORD LABELS' }
       },
       {
-        value: 'AI №1',
-        label: { ru: 'Пионер ИИ-вокала в РФ', en: 'AI vocal production pioneer' },
-        description: { ru: 'Песни голосами артистов & свой софт', en: 'Voice cloning & custom DSP plugins' }
+        value: '2',
+        label: { ru: 'ТРЕКА В ЧАРТЕ VK', en: 'TRACKS IN VK CHART' }
       }
     ]
   },

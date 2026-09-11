@@ -46,17 +46,20 @@ export const ru = {
     latestVersion: 'Версия'
   },
   about: {
-    badge: 'ОБО МНЕ / 10+ ЛЕТ ОПЫТА',
-    title: 'ПРОДАКШН, ЧАРТЫ И ИИ-ИННОВАЦИИ',
-    subtitle: '10+ лет работы с топ-артистами, релизы на мировых лейблах и первый в России профессиональный ИИ-продакшн.',
-    labelsTitle: 'РЕЛИЗЫ НА ЛЕЙБЛАХ',
-    artistsTitle: 'РАБОТАЛ С ТРЕКАМИ АРТИСТОВ',
-    showAllArtists: 'Показать всех (30+ артистов)',
-    hideArtists: 'Свернуть список',
-    yearsExp: 'Лет студийного опыта',
-    mixesCount: 'В чарте VK',
-    pluginsCount: 'Крупнейших лейблов',
-    accuracy: 'Пионер ИИ-вокала'
+    badge: 'K1RO',
+    title: 'SOUND & MUSIC PRODUCTION',
+    subtitle: 'Более 10 лет создаю звук для артистов, релизов и музыкальных проектов.',
+    labelsTitle: 'RELEASES / LABELS',
+    artistsTitle: 'АРТИСТЫ',
+    andOthers: 'и другие',
+    showAllArtists: 'Открыть полный список',
+    hideArtists: 'Скрыть список',
+    ctaWorks: 'ПОСЛУШАТЬ РАБОТЫ',
+    ctaContact: 'ОБСУДИТЬ ПРОЕКТ',
+    yearsExp: 'ЛЕТ В ИНДУСТРИИ',
+    artistsCount: 'АРТИСТОВ',
+    labelsCount: 'ЛЕЙБЛОВ',
+    vkChart: 'ТРЕКА В ЧАРТЕ VK'
   },
   cta: {
     badge: 'СОТРУДНИЧЕСТВО',

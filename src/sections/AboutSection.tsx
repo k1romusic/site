@@ -1,238 +1,246 @@
 import React, { useState } from 'react';
 import { useTranslation } from '../i18n/I18nContext';
 import { brandConfig } from '../data/brand';
-import { GlassCard } from '../components/ui/GlassCard';
+import { scrollToTarget } from '../hooks/useSmoothScroll';
 import {
-  Award,
-  TrendingUp,
-  Disc3,
-  Cpu,
   Sparkles,
-  CheckCircle2,
   ChevronDown,
   ChevronUp,
-  Flame,
   Music2,
-  Radio,
-  ShieldCheck
+  Disc3,
+  Cpu,
+  Mic2,
+  Layers,
+  ArrowUpRight,
+  Headphones,
+  MessageSquare
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export const AboutSection: React.FC = () => {
   const { lang, t } = useTranslation();
   const about = brandConfig.about;
-  const [showAllArtists, setShowAllArtists] = useState(false);
+  const [showFullArtists, setShowFullArtists] = useState(false);
 
-  const statIcons = [
-    <Award className="w-5 h-5 text-[#FFC300]" />,
-    <TrendingUp className="w-5 h-5 text-[#FFC300]" />,
-    <Disc3 className="w-5 h-5 text-[#FFC300]" />,
-    <Cpu className="w-5 h-5 text-[#FFC300]" />
+  const aiIcons = [
+    <Mic2 className="w-5 h-5 text-[#FFC300]" />,
+    <Layers className="w-5 h-5 text-[#FFC300]" />,
+    <Music2 className="w-5 h-5 text-[#FFC300]" />
   ];
 
-  const trustPillars = [
-    {
-      icon: <Radio className="w-5 h-5 text-[#FFC300]" />,
-      title: lang === 'ru' ? 'ЧАРТ-ЗВУЧАНИЕ БЕЗ КОМПРОМИССОВ' : 'CHART-READY SOUND',
-      desc:
-        lang === 'ru'
-          ? 'Коммерческий баланс, плотный пробивной низ и максимальная прозрачность, которая одинаково мощно звучит в наушниках, на радио и на многокиловаттных клубных саундсистемах.'
-          : 'Pristine commercial balance, heavy sub punch, and crystalline high-end engineered for massive playback across all club systems and streaming DSPs.'
-    },
-    {
-      icon: <Cpu className="w-5 h-5 text-[#FFC300]" />,
-      title: lang === 'ru' ? '№1 ПО ИИ-ВОКАЛУ В РФ' : '#1 AI VOCAL PIONEER IN RU',
-      desc:
-        lang === 'ru'
-          ? 'Один из первых в стране, кто внедрил нейросети в реальный вокальный продакшн: клонирование тембра, создание песен аутентичными голосами артистов и авторские DSP-плагины.'
-          : 'Pioneered neural voice synthesis and vocal cloning in Russia: creating authentic artist voices, seamless timbre replacement, and proprietary DSP plugins.'
-    },
-    {
-      icon: <ShieldCheck className="w-5 h-5 text-[#FFC300]" />,
-      title: lang === 'ru' ? '10+ ЛЕТ ОПЫТА И НАДЁЖНОСТИ' : '10+ YEARS OF RELIABILITY',
-      desc:
-        lang === 'ru'
-          ? 'Релизы на мировых мейджорах (Sony, Warner, Black Star), строгое соблюдение дедлайнов, юридическая чистота и уважение к творческому почерку каждого исполнителя.'
-          : 'Major label track record (Sony, Warner, Black Star), strict deadline compliance, full NDA confidentiality, and deep respect for artist individuality.'
-    }
-  ];
-
-  const primaryArtistsCount = 13;
-  const visibleArtists = showAllArtists
-    ? about.artists
-    : about.artists.slice(0, primaryArtistsCount);
+  const handleScrollTo = (target: string) => {
+    scrollToTarget(target, { offset: -70 });
+  };
 
   return (
-    <section id="about" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 relative">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#FFC300]/5 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-80 h-80 bg-[#FFC300]/[0.03] rounded-full blur-[110px] pointer-events-none" />
+    <section id="about" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 relative">
+      {/* Background Ambient Drifting Glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 sm:w-[550px] h-96 sm:h-[550px] bg-[#FFC300]/[0.04] rounded-full blur-[140px] pointer-events-none" />
 
-      {/* 1. Sferoom-inspired Massive Hero Showcase Card */}
-      <div className="mb-14 sm:mb-16 rounded-[32px] bg-gradient-to-br from-white/[0.06] via-[#FFC300]/[0.03] to-white/[0.02] border border-white/10 p-6 sm:p-10 lg:p-14 relative overflow-hidden shadow-2xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Col: Big Bold Numbers and Authority Badges */}
-          <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left border-b lg:border-b-0 lg:border-r border-white/10 pb-8 lg:pb-0 lg:pr-8">
-            <span className="text-[100px] sm:text-[130px] lg:text-[145px] font-black font-sans leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] via-[#ffd54f] to-[#594411] select-none block drop-shadow-[0_10px_35px_rgba(255,195,0,0.3)]">
-              10+
-            </span>
-            <span className="text-xs sm:text-sm font-mono tracking-[0.25em] text-[#FFC300] uppercase font-bold block -mt-2 mb-6">
-              {lang === 'ru' ? 'ЛЕТ В МУЗЫКАЛЬНОЙ ИНДУСТРИИ' : 'YEARS IN MUSIC INDUSTRY'}
-            </span>
+      {/* Main Glassmorphism Showcase Card */}
+      <div className="relative rounded-3xl bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent border border-white/10 p-6 sm:p-10 lg:p-14 overflow-hidden shadow-2xl">
+        {/* Glow Accent Top Right */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#FFC300]/10 rounded-full blur-[100px] pointer-events-none" />
 
-            {/* Micro Credibility Highlight Badges */}
-            <div className="flex flex-col gap-2.5 w-full max-w-xs">
-              <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-black/40 border border-white/10 text-xs text-[#F5F0E8]/90">
-                <Flame className="w-4 h-4 text-[#FFC300] shrink-0" />
-                <span className="font-semibold">2 трека в чарте VK</span>
-              </div>
-              <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-black/40 border border-white/10 text-xs text-[#F5F0E8]/90">
-                <Disc3 className="w-4 h-4 text-[#FFC300] shrink-0" />
-                <span className="font-semibold">11+ топ-лейблов (Sony, Warner, BS...)</span>
-              </div>
-              <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-black/40 border border-[#FFC300]/30 text-xs text-[#FFC300]">
-                <Cpu className="w-4 h-4 text-[#FFC300] shrink-0" />
-                <span className="font-bold">Пионер ИИ-вокала в России</span>
-              </div>
-            </div>
+        {/* 1. Primary Header: K1RO -> SOUND & MUSIC PRODUCTION */}
+        <div className="max-w-4xl mb-8 sm:mb-10 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFC300]/10 border border-[#FFC300]/30 text-xs font-black tracking-[0.25em] text-[#FFC300] uppercase mb-4 shadow-[0_0_15px_rgba(255,195,0,0.1)]">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{about.badge[lang]}</span>
           </div>
 
-          {/* Right Col: High-Impact Selling Narrative */}
-          <div className="lg:col-span-8 flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFC300]/15 border border-[#FFC300]/30 text-xs font-bold text-[#FFC300] uppercase tracking-widest w-fit mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{t.about.badge}</span>
-            </div>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] via-[#ffd54f] to-[#b38800] uppercase tracking-[0.08em] leading-tight mb-5">
+            {about.title[lang]}
+          </h2>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#F5F0E8] uppercase tracking-tight leading-tight mb-4">
-              {about.title[lang]}
-            </h2>
+          <p className="text-base sm:text-lg text-[#F5F0E8]/95 font-medium leading-relaxed mb-4">
+            {about.lead[lang]}
+          </p>
 
-            <p className="text-sm sm:text-base text-[#F5F0E8]/90 font-medium leading-relaxed mb-4">
-              {about.lead[lang]}
-            </p>
-
-            <p className="text-xs sm:text-sm text-[#F5F0E8]/70 leading-relaxed">
-              {about.bio[lang]}
-            </p>
-          </div>
+          <p className="text-sm sm:text-base text-[#F5F0E8]/75 leading-relaxed">
+            {about.bio[lang]}
+          </p>
         </div>
 
-        {/* Labels Banner Strip: Black Star, Warner, Sony... */}
-        <div className="mt-10 pt-8 border-t border-white/10">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#FFC300] font-bold mb-3.5">
+        {/* 2. Minimalist Typographic Statistics Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 my-8 sm:my-10 pt-8 border-t border-white/10 relative z-10">
+          {about.stats.map((stat, idx) => (
+            <div
+              key={idx}
+              className="p-4 sm:p-5 rounded-2xl bg-black/40 border border-white/10 hover:border-[#FFC300]/40 transition-all duration-300 flex flex-col justify-center"
+            >
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] to-[#b38800] tracking-tight leading-none mb-2">
+                {stat.value}
+              </div>
+              <div className="text-[11px] sm:text-xs font-bold font-mono tracking-wider text-[#F5F0E8]/80 uppercase">
+                {stat.label[lang]}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 3. RELEASES / LABELS (Compact, clean typographic strip) */}
+        <div className="my-8 sm:my-10 pt-8 border-t border-white/10 relative z-10">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-[#FFC300] font-bold mb-4">
             <Disc3 className="w-3.5 h-3.5" />
             <span>{t.about.labelsTitle}</span>
           </div>
 
-          <div className="flex flex-wrap gap-2 sm:gap-2.5">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
             {about.labels.map((label, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-[11px] sm:text-xs font-mono font-bold tracking-wider text-[#F5F0E8] hover:border-[#FFC300]/50 hover:text-[#FFC300] transition-colors shadow-sm"
+                className="px-3 sm:px-3.5 py-1.5 rounded-lg bg-black/50 border border-white/10 text-[11px] sm:text-xs font-mono font-semibold tracking-wider text-[#F5F0E8]/90 hover:border-[#FFC300]/50 hover:text-[#FFC300] transition-colors"
               >
-                <CheckCircle2 className="w-3 h-3 text-[#FFC300]" />
                 {label}
               </span>
             ))}
+            <span className="text-xs font-mono text-white/40 px-2 py-1 italic">
+              {t.about.andOthers}
+            </span>
           </div>
         </div>
 
-        {/* Artists Roster: Real credits from VK profile */}
-        <div className="mt-8 pt-6 border-t border-white/10">
-          <div className="flex items-center justify-between gap-4 mb-3.5">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-[#FFC300] font-bold">
+        {/* 4. ARTISTS (Featured + Expandable Full Roster) */}
+        <div className="my-8 sm:my-10 pt-8 border-t border-white/10 relative z-10">
+          <div className="flex items-center justify-between gap-4 mb-4">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-[#FFC300] font-bold">
               <Music2 className="w-3.5 h-3.5" />
               <span>{t.about.artistsTitle}</span>
             </div>
 
             <button
               type="button"
-              onClick={() => setShowAllArtists(!showAllArtists)}
-              className="inline-flex items-center gap-1 text-xs font-bold text-[#FFC300] hover:text-white transition-colors cursor-pointer"
+              onClick={() => setShowFullArtists(!showFullArtists)}
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#FFC300] hover:text-white transition-colors cursor-pointer"
             >
-              <span>{showAllArtists ? t.about.hideArtists : t.about.showAllArtists}</span>
-              {showAllArtists ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+              <span>{showFullArtists ? t.about.hideArtists : t.about.showAllArtists}</span>
+              {showFullArtists ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
           </div>
 
+          {/* Featured Artists (Always visible, clean tags) */}
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            <AnimatePresence>
-              {visibleArtists.map((artist, idx) => {
-                const isFeatured = idx < 6;
-                return (
-                  <motion.span
-                    key={artist}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.15 }}
-                    className={`inline-flex items-center px-2.5 sm:px-3 py-1 rounded-md text-xs transition-all ${
-                      isFeatured
-                        ? 'bg-[#FFC300]/10 border border-[#FFC300]/35 text-[#FFC300] font-bold shadow-[0_0_12px_rgba(255,195,0,0.15)]'
-                        : 'bg-white/5 border border-white/10 text-white/80 hover:border-white/30 hover:text-white'
-                    }`}
-                  >
-                    {artist}
-                  </motion.span>
-                );
-              })}
-            </AnimatePresence>
+            {about.featuredArtists.map((artist) => (
+              <span
+                key={artist}
+                className="px-3 py-1 rounded-md text-xs sm:text-sm bg-white/5 border border-white/10 text-[#F5F0E8] font-medium"
+              >
+                {artist}
+              </span>
+            ))}
+            {!showFullArtists && (
+              <button
+                type="button"
+                onClick={() => setShowFullArtists(true)}
+                className="px-3 py-1 rounded-md text-xs sm:text-sm bg-white/5 border border-dashed border-white/20 text-[#FFC300] hover:border-[#FFC300] transition-colors cursor-pointer"
+              >
+                {t.about.andOthers} ...
+              </button>
+            )}
+          </div>
+
+          {/* Full List Expandable Drawer */}
+          <AnimatePresence>
+            {showFullArtists && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden mt-3 pt-3 border-t border-white/5"
+              >
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 p-3 sm:p-4 rounded-xl bg-black/40 border border-white/5">
+                  {about.allArtists.map((artist) => (
+                    <span
+                      key={artist}
+                      className="px-2.5 py-1 rounded-md text-xs bg-white/[0.04] border border-white/10 text-white/80"
+                    >
+                      {artist}
+                    </span>
+                  ))}
+                  <span className="px-2.5 py-1 text-xs text-white/40 italic flex items-center">
+                    {t.about.andOthers}
+                  </span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* 5. AI × MUSIC — MAIN MODERN ADVANTAGE */}
+        <div className="mt-8 sm:mt-10 pt-8 border-t border-white/10 relative z-10">
+          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#FFC300]/[0.08] via-white/[0.02] to-black/60 border border-[#FFC300]/30 shadow-lg mb-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+              <div className="flex items-center gap-2.5">
+                <span className="p-2 rounded-xl bg-[#FFC300]/15 border border-[#FFC300]/30 text-[#FFC300]">
+                  <Cpu className="w-5 h-5" />
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FFC300] via-[#ffd54f] to-white uppercase tracking-wider">
+                  {about.aiOverview.title[lang]}
+                </h3>
+              </div>
+              <span className="text-[11px] font-mono tracking-widest text-[#FFC300]/80 uppercase px-3 py-1 rounded-full bg-[#FFC300]/10 border border-[#FFC300]/20 w-fit">
+                NEXT GENERATION WORKFLOW
+              </span>
+            </div>
+
+            <p className="text-sm sm:text-base text-[#F5F0E8]/90 leading-relaxed max-w-4xl mb-6 font-medium">
+              {about.aiOverview.lead[lang]}
+            </p>
+
+            {/* 3 Directions: AI VOCAL, AI PRODUCTION, AI MUSIC */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {about.aiOverview.pillars.map((pillar, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 sm:p-5 rounded-xl bg-black/50 border border-white/10 flex flex-col gap-2 hover:border-[#FFC300]/40 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    {aiIcons[idx]}
+                    <span className="text-xs sm:text-sm font-black text-[#FFC300] tracking-wider uppercase">
+                      {pillar.tag}
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-[13px] text-[#F5F0E8]/70 leading-relaxed">
+                    {pillar.desc[lang]}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* 2. 4 Stat Credibility Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-14 sm:mb-16">
-        {about.stats.map((stat, idx) => (
-          <GlassCard
-            key={idx}
-            hoverEffect={true}
-            glowOnHover={true}
-            className="p-5 sm:p-7 border border-white/10 bg-white/[0.03] flex flex-col justify-between"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <span className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-[#FFC300]">
-                {statIcons[idx]}
-              </span>
-              <span className="text-xs font-mono text-white/25">0{idx + 1}</span>
-            </div>
-            <div>
-              <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#FFC300] to-[#b38800] tracking-tight block mb-1">
-                {stat.value}
-              </span>
-              <p className="text-xs sm:text-sm font-bold text-[#F5F0E8] tracking-wide mb-1">
-                {stat.label[lang]}
-              </p>
-              <p className="text-[11px] text-[#F5F0E8]/55 leading-tight">
-                {stat.description[lang]}
-              </p>
-            </div>
-          </GlassCard>
-        ))}
-      </div>
+        {/* 6. CTA Buttons (ПОСЛУШАТЬ РАБОТЫ / ОБСУДИТЬ ПРОЕКТ) */}
+        <div className="mt-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+          <p className="text-xs sm:text-sm text-white/50 text-center sm:text-left font-mono">
+            EXPERTISE • CREDIBILITY • EXPERIENCE • MODERN TECHNOLOGY
+          </p>
 
-      {/* 3. Three Trust & Quality Pillars */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-        {trustPillars.map((pillar, idx) => (
-          <GlassCard
-            key={idx}
-            hoverEffect={true}
-            className="p-6 sm:p-7 border border-white/10 bg-black/30 flex flex-col gap-3"
-          >
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#FFC300]">
-              {pillar.icon}
-            </div>
-            <h3 className="text-sm sm:text-base font-black uppercase text-[#F5F0E8] tracking-wide mt-1">
-              {pillar.title}
-            </h3>
-            <p className="text-xs sm:text-sm text-[#F5F0E8]/65 leading-relaxed">
-              {pillar.desc}
-            </p>
-          </GlassCard>
-        ))}
+          <div className="flex flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
+            <button
+              type="button"
+              onClick={() => handleScrollTo('works')}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/15 text-[#F5F0E8] font-bold text-xs uppercase tracking-wider hover:border-[#FFC300]/50 hover:bg-[#FFC300]/10 hover:text-[#FFC300] transition-all cursor-pointer active:scale-95 shadow-md"
+            >
+              <Headphones className="w-4 h-4" />
+              <span>{t.about.ctaWorks}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleScrollTo('contact')}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#FFC300] to-[#e6b000] text-black font-black text-xs uppercase tracking-wider hover:scale-105 hover:shadow-[0_0_25px_rgba(255,195,0,0.4)] transition-all cursor-pointer active:scale-95 shadow-lg"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>{t.about.ctaContact}</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
+
 

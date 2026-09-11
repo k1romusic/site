@@ -46,17 +46,20 @@ export const en = {
     latestVersion: 'Version'
   },
   about: {
-    badge: 'ABOUT ME / 10+ YEARS EXPERIENCE',
-    title: 'PRODUCTION, CHARTS & AI INNOVATION',
-    subtitle: '10+ years engineering chart hits, releases on major labels, and cutting-edge neural vocal tech.',
-    labelsTitle: 'MAJOR LABEL RELEASES',
-    artistsTitle: 'ARTIST CREDITS & COLLABORATIONS',
-    showAllArtists: 'View All (30+ Artists)',
-    hideArtists: 'Show Less',
-    yearsExp: 'Years of Studio Experience',
-    mixesCount: 'VK Chart Hits',
-    pluginsCount: 'Major Record Labels',
-    accuracy: 'AI Vocal Tech Pioneer'
+    badge: 'K1RO',
+    title: 'SOUND & MUSIC PRODUCTION',
+    subtitle: 'Over 10 years crafting sound for artists, releases, and music projects.',
+    labelsTitle: 'RELEASES / LABELS',
+    artistsTitle: 'ARTISTS',
+    andOthers: 'and others',
+    showAllArtists: 'Open full list',
+    hideArtists: 'Hide list',
+    ctaWorks: 'LISTEN TO WORKS',
+    ctaContact: 'DISCUSS PROJECT',
+    yearsExp: 'YEARS IN INDUSTRY',
+    artistsCount: 'ARTISTS',
+    labelsCount: 'RECORD LABELS',
+    vkChart: 'TRACKS IN VK CHART'
   },
   cta: {
     badge: 'COLLABORATION',
