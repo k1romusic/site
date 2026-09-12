@@ -98,14 +98,17 @@ export function useSmoothScroll(enabled: boolean = true) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    // Initialize Lenis
+    // Initialize Lenis with hardware-accelerated fluid settings
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isTouch ? 0.8 : 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      syncTouch: false, // Don't force override native touch physics in Telegram webview
+      touchMultiplier: 1.2,
     });
 
     window.__lenis = lenis;

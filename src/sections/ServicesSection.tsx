@@ -4,7 +4,6 @@ import { useTranslation } from '../i18n/I18nContext';
 import { servicesList } from '../data/services';
 import { GlassCard } from '../components/ui/GlassCard';
 import { Sliders, Music, Mic2, Cpu, CheckCircle2, ArrowUpRight, Sparkles, Disc, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion } from 'motion/react';
 
 export const ServicesSection: React.FC = () => {
   const { lang, t } = useTranslation();
@@ -72,18 +71,14 @@ export const ServicesSection: React.FC = () => {
           className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory py-2 pb-4 scrollbar-none"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {servicesList.map((service, idx) => {
+          {servicesList.map((service) => {
             const isAiTools = service.id === 'ai-tools';
             const isVoice = service.id === 'ai-voice-production';
             const cardLink = isAiTools ? '/plugins' : '#contact';
 
             return (
-              <motion.div
+              <div
                 key={service.id}
-                initial={{ opacity: 0, y: 25, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.45, delay: idx * 0.08, ease: 'easeOut' }}
                 className="flex-none w-[85vw] sm:w-[360px] lg:w-[380px] snap-start"
               >
                 {isAiTools ? (
@@ -194,7 +189,7 @@ export const ServicesSection: React.FC = () => {
                     </GlassCard>
                   </a>
                 )}
-              </motion.div>
+              </div>
             );
           })}
         </div>

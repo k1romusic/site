@@ -142,7 +142,7 @@ export const SelectedWorksSection: React.FC = () => {
               <div
                 key={work.id}
                 onClick={() => toggleTrack(work.id, work.audioPreviewUrl)}
-                className={`flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] md:w-[calc(25%-15px)] lg:w-[calc(16.666%-17px)] snap-start group relative rounded-2xl overflow-hidden bg-[#181716] border transition-all duration-300 cursor-pointer select-none flex flex-col ${
+                className={`flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] md:w-[calc(25%-15px)] lg:w-[calc(16.666%-17px)] snap-start group relative rounded-2xl overflow-hidden bg-[#181716] border transition-all duration-300 cursor-pointer select-none flex flex-col transform-gpu ${
                   isThisPlaying
                     ? 'border-[#FFC300] ring-2 ring-[#FFC300]/40 shadow-[0_0_25px_rgba(255,195,0,0.35)] scale-[1.02]'
                     : 'border-white/10 hover:border-[#FFC300]/60 hover:scale-105 shadow-lg'
@@ -153,10 +153,13 @@ export const SelectedWorksSection: React.FC = () => {
                   <img
                     src={coverUrl}
                     alt={`${work.artist} - ${work.title}`}
+                    width={320}
+                    height={320}
+                    loading="lazy"
+                    decoding="async"
                     className={`w-full h-full object-cover transition-transform duration-500 ease-out ${
                       isThisPlaying ? 'scale-110' : 'group-hover:scale-110'
                     }`}
-                    loading="lazy"
                   />
 
                   {/* Subtle dark gradient for badge readability */}

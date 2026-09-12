@@ -91,15 +91,18 @@ export const AiToolsOverviewSection: React.FC = () => {
               <Link
                 key={plugin.id}
                 to={`/plugins#${plugin.id}`}
-                className="rounded-2xl bg-black/40 border border-white/10 p-4 sm:p-5 flex flex-col justify-between group/item hover:border-[#FFC300]/60 hover:bg-black/60 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-[0_10px_30px_rgba(255,195,0,0.15)] cursor-pointer"
+                className="rounded-2xl bg-black/40 border border-white/10 p-4 sm:p-5 flex flex-col justify-between group/item hover:border-[#FFC300]/60 hover:bg-black/60 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-[0_10px_30px_rgba(255,195,0,0.15)] cursor-pointer transform-gpu"
               >
                 {/* Image Thumbnail */}
                 <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-black/80 border border-white/10 mb-4">
                   <img
                     src={resolveAssetUrl(plugin.image)}
                     alt={plugin.name}
-                    className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"
+                    width={560}
+                    height={350}
                     loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                   
